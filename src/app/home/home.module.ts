@@ -73,7 +73,6 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
@@ -118,7 +117,6 @@ import { NgxStarsModule } from 'ngx-stars';
    
     }),
     FontAwesomeModule, 
-    NgxSliderModule,
     LeafletModule,
     NgxColorsModule,
     NgxDraggableDomModule,

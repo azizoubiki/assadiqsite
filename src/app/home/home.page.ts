@@ -79,7 +79,6 @@ faRobot
 //@ts-ignore
 import * as randomColor from 'randomcolor';
 
-import { Options } from '@angular-slider/ngx-slider';
 
 
 import { Camera, CameraResultType } from '@capacitor/camera';
@@ -409,20 +408,7 @@ objectstomove :any = [];
 
 
 
-optionssliderverical: Options = {
-  floor: 1,
-  ceil: 10,
-  vertical: true
 
-};
-
-
-optionssliderhorisontal: Options = {
-  floor: 1,
-  ceil: 10,
-  vertical: false
-
-};
 
 valuesliderscalex = 1
 

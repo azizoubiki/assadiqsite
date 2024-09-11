@@ -13,7 +13,6 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-slider/ngx-slider": "^14.0.0",
     "@angular/animations": "^18.0.0",
     "@angular/common": "^18.0.0",
     "@angular/compiler": "^18.0.0",
@@ -156,8 +155,5 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.4.0"
   },
-  "overrides": {
-    "@angular-slider/ngx-slider@": "~14.0.0"
-},
   "description": "An Ionic project"
 }
