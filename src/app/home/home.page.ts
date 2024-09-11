@@ -46,7 +46,7 @@ import {
 import { Socket } from 'ngx-socket-io';
 
 import { Share } from '@capacitor/share';
-import { SwipeEvent } from 'ng-swipe';
+
 
 
 
@@ -2635,7 +2635,7 @@ this.showspinnerwaitinganimeinfo = false;
 }
 }
 
-onSwipeEndvideo(event: SwipeEvent) {
+onSwipeEndvideo(event: any) {
   
   if(event.direction === 'x' && event.distance > 0){
     console.log('right')
@@ -2649,7 +2649,7 @@ onSwipeEndvideo(event: SwipeEvent) {
 
 }
 
-onSwipeEndvideorecived(event: SwipeEvent) {
+onSwipeEndvideorecived(event: any) {
  
 
   if(event.direction === 'y' && event.distance > 0){
