@@ -156,10 +156,8 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.4.0"
   },
-  "peerDependenciesMeta": {
-    "@angular/common": {
-      "optional": true
-    }
-  },
+  "overrides": {
+    "@angular-slider/ngx-slider@": "14.0.0"
+},
   "description": "An Ionic project"
 }
