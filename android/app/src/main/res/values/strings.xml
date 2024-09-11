@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Assadiq</string>
+    <string name="title_activity_main">Assadiq</string>
+    <string name="package_name">az.assadiq.app</string>
+    <string name="custom_url_scheme">az.assadiq.app</string>
+</resources>

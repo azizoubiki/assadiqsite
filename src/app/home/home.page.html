@@ -1,0 +1,7496 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title style="
+      color: aliceblue;
+      font-size: x-large;
+      ">
+      <strong>
+        Assadiq
+
+      </strong>
+    </ion-title>
+
+
+
+<ion-buttons slot="start">
+  <ion-menu-button style="color: aliceblue;" menu="menuAssadiq">
+
+  </ion-menu-button>
+</ion-buttons>
+        
+
+<ion-buttons slot="end">
+
+
+
+  <ion-button
+  (click)="showmodalnotifications = true;"
+   >
+    <ion-badge style="border: solid 2px aliceblue;padding-left: 5px;padding-right: 5px;"
+     [color]="'success' " mode="ios">
+    <strong 
+    [innerHTML]="listofmessagevideoprive.length | miliffynumber:'number'"
+    style="color: aliceblue;">
+
+    </strong>
+    </ion-badge>
+    <fa-icon style="color: aliceblue;" 
+  
+    class="fa-2x" [icon]="faBell"></fa-icon>
+ 
+    
+  </ion-button>
+
+
+
+
+  <ion-button 
+  (click)="showmodaluserconnected = true"
+  >
+    <ion-badge style="border: solid 2px aliceblue;padding-left: 5px;padding-right: 5px;"
+     [color]="socketstate ? 'success': 'danger' " mode="ios">
+    <strong 
+    [innerHTML]="userconnectedlist.length | miliffynumber:'number'"
+    style="color: aliceblue;">
+
+    </strong>
+    </ion-badge>
+  
+      <i-bs style="color:aliceblue;" name="people"
+      width='35'
+        height="35">
+  </i-bs>
+    
+  </ion-button>
+</ion-buttons>
+</ion-toolbar>
+
+<ion-progress-bar
+*ngIf="showspinnerhome"
+style="
+height: 10px;
+width: 100%;
+" type="indeterminate" value="0.42" buffer="0.5" reversed="false" 
+color="danger"></ion-progress-bar>
+</ion-header>
+
+<ion-content id="menuAssadiq" [fullscreen]="true">
+
+
+
+
+
+
+
+  <div
+  *ngIf="false"
+  style="
+  background: transparent;
+  text-align: center;
+  position: fixed;
+  top: 30%;
+  z-index: 99999999;
+  width: 100%;
+  "
+  >
+    <ion-spinner style="
+    scale: 5;
+    " name="dots" color="danger"></ion-spinner>
+  </div>
+
+
+
+
+
+
+
+
+
+  <swiper-container  
+  style="
+  height: 100%;
+  background: black;
+  color: aliceblue;
+  "
+ 
+  appSwiper #swiperhome [config]="swiperConfig" thumbs-swiper=".mySwiper2"
+   (slidechange)="slideChange($event)">
+
+
+
+
+
+   <swiper-slide style="background: black;overflow: hidden;height: 100%;" >
+
+
+
+
+
+
+    <swiper-container  
+    [touchStartPreventDefault]="false"
+    style="
+    height: 100%;
+    background: black;
+    color: aliceblue;
+    "
+   appSwiper
+     #swiperhomevertical [config]="swiperConfigvertical" thumbs-swiper=".mySwiper2"
+     (slidechange)="slideChangevertical($event)">
+
+
+     
+    <swiper-slide 
+    style="background: black;overflow: hidden;
+    width: 100%;
+    height: 100%;
+ 
+    "
+    
+    >
+
+
+
+
+
+
+
+    <div
+    style="width: 100%;text-align: center;margin-top: 20px;
+    height: 225px;
+    overflow: scroll;
+    "
+    >
+<strong style="color: #800;font-size: 30px;">
+Assadiq
+</strong>
+<br>
+<br>
+
+<strong style="color: aliceblue;">
+Share Your Business and Services with all people connected with you in real time
+</strong>
+
+
+<br>
+<br>
+
+<ion-button *ngIf="false" color="danger" fill="solid" style="
+border-radius: 50px;
+border: solid 2px aliceblue;
+" shape="round">
+ 
+<strong style="color: aliceblue;font-size: 20px;">
+ Try It with Friends
+  </strong>
+</ion-button>
+
+
+<a href="../../../app-release.apk" download>
+  Download
+</a>
+
+    </div>
+    
+  
+
+   
+
+
+
+
+
+
+ 
+   
+
+
+
+
+
+
+
+
+ 
+    <div 
+  *ngIf="showhandindex"
+    
+    style="
+    position: absolute;
+    left: 50%;
+    text-align: center;
+    z-index: 1000;
+    bottom: 10px;
+    transform: rotate(-45deg);
+animation: handmove 2s infinite;
+animation-direction: alternate;
+    ">
+<i-bs style="
+color: #800;
+
+" name="hand-index"
+width="75"
+  height="75">
+</i-bs>
+    </div>
+
+    </swiper-slide>
+
+
+    <swiper-slide 
+    *ngFor="let item of listofvideorecived;let i = index;trackBy:trackloopangular"
+    
+    style="background: black;overflow: hidden;
+    width: 100%;
+    height: 100%;
+ 
+    "
+[hidden]='listofvideorecived?.length === 0 '
+    
+    >
+
+  
+
+ 
+
+<ion-item
+style="
+border: solid 2px aliceblue;
+--background: rgb(0, 0, 0 , 0.5);
+color: aliceblue;
+border-radius: 50px;
+position: absolute;
+    z-index: 9999;
+    right: 0;
+    max-width: 50%;
+"
+*ngIf="item?.subtitle?.length> 0 "
+>
+ 
+
+
+       
+        <ion-select
+        (ionChange)="selectsubtitlesofvideorecived($event)"
+        [value]="item?.subtitle[0]?.url" multiple="false"
+         [placeholder]="item?.subtitle[0]?.quality">
+          <ion-select-option
+          *ngFor="let sub of item?.subtitle"
+          [value]="sub?.url">
+        <strong style="color: aliceblue;">
+          {{sub?.lang}}
+        </strong> 
+        </ion-select-option>
+
+
+
+        <ion-select-option
+        
+        [value]="'off'">
+      <strong style="color: aliceblue;">
+        OFF
+      </strong> 
+      </ion-select-option>
+          
+        </ion-select>
+
+     
+
+      </ion-item>
+
+
+      <div
+      style="
+border-bottom: solid 2px aliceblue;
+background: rgb(0, 0, 0 , 0.5);
+color: aliceblue;
+position: absolute;
+    z-index: 9999;
+    left: 0;
+    height: 50px;
+    width: 50%;
+    text-align: center;
+"
+*ngIf='item?.description'
+      >
+<strong style="color: aliceblue;" [innerHTML]="item?.description">
+
+</strong>
+      </div> 
+
+      <div
+      style="
+
+
+color: aliceblue;
+position: absolute;
+    z-index: 9999;
+    left: 0;
+    height: 50px;
+
+    text-align: center;
+    bottom: 110px;
+    display: flex;
+    gap: 25px;
+    left: 10px;
+"
+
+      >
+      <div
+     *ngIf="item?.map?.length > 0"
+      tappable
+      (click)='openmapwithcoordinate(item?.map)'
+      >
+        <fa-icon style="color: greenyellow;padding-left: 10px;" 
+        
+        class="fa-2x" [icon]="faLocationPin"></fa-icon>
+      </div>
+
+      <div
+      
+       tappable
+       (click)='showvideorecivedfull= !showvideorecivedfull'
+       >
+       <div
+       *ngIf="showvideorecivedfull"
+       >
+
+       <i-bs name="fullscreen-exit"
+       width="35"
+         height="35">
+</i-bs>
+
+</div>
+
+<div
+*ngIf="!showvideorecivedfull"
+>
+
+  <i-bs  name="fullscreen"
+  width="35"
+    height="35">
+</i-bs>
+
+</div>
+       </div>
+
+
+<div
+tappable
+(click)="shareImagevideorecived(item?.poster)"
+>
+  <fa-icon style="color: #800;padding-left: 10px;" 
+  
+  class="fa-2x" [icon]="faShare"></fa-icon>
+</div>
+
+
+
+<div
+*ngIf="item.phonenumber"
+
+>
+  <ion-button 
+  style="border: solid 2px aliceblue;border-radius: 50px;width: 75px;"
+  color="success" fill="solid" shape="round">
+  <a [href]="'tel:'+item.phonenumber">
+   <i-bs style="color: aliceblue;" name="telephone-outbound"
+   width="35"
+     height="35">
+ </i-bs>
+   </a>
+  </ion-button>
+</div>
+
+      </div>
+
+   
+
+      <vg-player
+      (onPlayerReady)="playervideogularreadyvideorecived($event)"
+    
+      style="height: calc(100% - 60px);width: 100%;"
+      *ngIf="activeindexslidevertical === (i + 1 ) "
+   
+      >
+
+      <div style="
+      position: absolute;
+      bottom: 0;
+      height: 50px;
+      width: 100%;
+      z-index: 1;
+      " 
+      
+      
+      [style.height]="minimiseplayer ? '15px' : '50px'"
+      
+      id="canvaeldividclone">
+      </div>
+    
+  
+    <vg-controls
+   
+    [hidden]="videorecordingstart" 
+            
+            vgFor="videorecivedelid" [vgAutohide]="true" [vgAutohideTime]="5">
+              <vg-time-display vgFor="videorecivedelid" [vgProperty]="'current'" [vgFormat]="'hh:mm:ss'"></vg-time-display>
+          
+        
+              <ion-range
+           
+              style="padding-left: 25px;padding-right: 25px;"
+              #rangetimervideorecivedvalue
+                min="0" [max]="videorecivedduration"
+                dualKnobs="false" pin="true"
+                snaps="true" step="1"
+                ticks="true" value="0"
+                color="danger"
+                (click)="rangeChangevideorecivedtime($event)"
+                (ionKnobMoveEnd)="rangeChangevideorecivedtime($event)"
+                
+                >
+              </ion-range>
+    
+    
+              <vg-scrub-bar  
+             hidden
+              >
+              <vg-scrub-bar-current-time style="
+                    background: #800;
+        z-index: 999999999999;
+    
+                " vgFor="videorecivedelid" [vgSlider]="true"></vg-scrub-bar-current-time>
+    
+    
+     
+                <vg-scrub-bar-buffering-time style="
+                  background: #800;
+                  border-radius: 50px;
+                  " vgFor="videorecivedelid"></vg-scrub-bar-buffering-time>
+            </vg-scrub-bar>
+    
+            <vg-time-display
+            #vgplayerrecivedtotaltime
+            vgFor="videorecivedelid" [vgProperty]="'total'" [vgFormat]="'hh:mm:ss'"></vg-time-display>
+    
+        </vg-controls>
+
+
+   
+      <video 
+      *ngIf="item?.type !== 'hls'"
+      (timeupdate)="videorecivedupdatetime()"
+     
+      [style.objectFit]="showvideorecivedfull ? 'fill' : 'contain'"
+    
+
+      (waiting)="videorecievedwaiting()"
+     
+      [controls]="false"
+   
+
+(click)="pauseplayvideoplayerrecived()"
+
+[currentTime]="item.time ? item.time : 0 "
+
+ 
+             
+[vgMedia]="$any(videoplayerelrecived)"
+
+           
+
+
+             [src]="item?.video | miliffynumber:'buffer'"
+             crossorigin="anonymous"
+          
+             #videoplayerelrecived
+           
+           
+             id="videorecivedelid"
+             
+          
+             
+             autoplay loop  style="width: 100%;height: 100%;
+             position: relative;
+             z-index: 1;
+             background: black;
+             "  [poster]='item?.poster' (playing)="playingvideorecived(vgplayerrecivedtotaltime)">
+      </video>
+
+      <video 
+      (timeupdate)="videorecivedupdatetime()"
+     
+      [style.objectFit]="showvideorecivedfull ? 'fill' : 'contain'"
+      
+
+      *ngIf="item?.type === 'hls'"
+
+      #vgHls="vgHls"
+   
+
+
+ 
+             
+[vgMedia]="$any(videoplayerelrecived)"
+
+      (click)="pauseplayvideoplayerrecived()"
+           
+      [currentTime]="item.time ? item.time : 0 "
+
+
+             [vgHls]="item?.video"
+             crossorigin="anonymous"
+          
+             #videoplayerelrecived
+           
+           
+             id="videorecivedelid"
+             
+          [controls]="false"
+             
+             autoplay loop  style="width: 100%;height: 100%;
+             position: relative;
+             z-index: 1;
+             background: black;
+             "  [poster]='item?.poster' 
+             (playing)="playingvideorecived(vgplayerrecivedtotaltime)"
+             (waiting)="videorecievedwaiting()"
+        
+             >
+
+             <track style="
+             color: #800;
+             "
+             *ngIf="videosubtitleschoosedrecived"
+             [src]="videosubtitleschoosedrecived" kind="subtitles"  default>
+
+
+      </video>
+
+    
+   
+
+
+    </vg-player>
+
+
+<div
+style="position: absolute;bottom: 0;display: flex;width: 100%;text-align: center;
+z-index: 9999999;
+background: rgb(0, 0, 0 , 0.5);
+gap: 10px;
+height: 60px;
+"
+[style.display]='listofvideorecived?.length === 0 ?"none": "flex"'
+
+*ngIf="activeindexslidevertical === (i + 1 ) "
+
+>
+
+
+<div style="width: 100%;">
+  <ion-input style="
+    color: aliceblue;
+    border: solid 2px aliceblue;
+    border-radius: 50px;
+    --padding-start:10px;
+    --padding-end:10px;
+    " 
+  shape="round"
+  (ionFocus)="showemojidiv = false;"
+    #textareavideomeassage
+   
+    placeholder="Enter Message" 
+    
+    
+    ></ion-input>
+</div>
+
+<div tappable 
+(click)="showemojidiv = !showemojidiv"
+>
+<i-bs style="color: #800;"
+*ngIf="!showemojidiv"
+name="emoji-smile"
+            width="35"
+              height="35">
+</i-bs>
+
+<i-bs style="color: aliceblue;"
+*ngIf="showemojidiv"
+name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+
+</div>
+
+<div>
+  <ion-button (click)="sendmessagetoothersvideos(textareavideomeassage,item?.id)" style="
+    border: solid 2px aliceblue;
+    border-radius: 50px;
+    " color="danger" fill="solid" shape="round">
+    <i-bs style="color: aliceblue;" name="send-fill"
+    width='35'
+      height="35">
+</i-bs>
+  </ion-button>
+</div>
+
+
+</div>
+
+
+    
+
+
+
+
+</swiper-slide>
+
+
+      </swiper-container>
+
+
+      <div
+      style="position: absolute;
+      z-index: 999999999999999;
+      background: black;
+      top: 0;
+      "
+    [hidden]="activeindexslidevertical === 0"
+
+      >
+      <emoji-mart
+      *ngIf="showemojidiv"
+      (emojiClick)="addEmojitotextarea($event)"></emoji-mart>  
+    </div>
+
+    <div
+    style="
+    position: fixed;z-index: 9999999;top: 30%;
+    text-align: center;width: 100%;
+    "
+      [hidden]="activeindexslidevertical === 0"
+      *ngIf="showspinnerwitingvideorecivedtoplay"
+    >
+
+    <ion-spinner
+  
+    style="color: #800;z-index: 9999999;scale: 5
+    "
+    name="dots"></ion-spinner>
+  </div>
+
+
+
+
+ 
+<div style="display: flex;flex-direction: column;
+position: fixed;right: 10px;bottom: 150px;z-index: 9999999;
+">
+
+
+<div>
+
+<ion-button 
+(click)="opencameravideo(false)"
+style="border-radius: 50px;border:
+ solid 2px aliceblue;"
+color="danger" fill="solid" shape="round">
+  <i-bs style="color: aliceblue;" name="camera-reels"
+            width="35"
+              height="35">
+</i-bs>
+</ion-button>
+
+</div>
+
+
+<div
+
+>
+  <ion-button 
+(click)="inputimagesvideofilefromdevice?.click()"
+style="border-radius: 50px;border:
+ solid 2px aliceblue;"
+color="danger" fill="solid" shape="round">
+  <i-bs style="color: aliceblue;" name="images"
+            width="35"
+              height="35">
+</i-bs>
+</ion-button>
+<input multiple
+
+(change)="imagesvideochangedfromdevice($event,inputimagesvideofilefromdevice)" hidden 
+#inputimagesvideofilefromdevice accept="image/*" type='file' >
+
+</div>
+
+
+<div>
+  <ion-button 
+(click)="inputvideofilefromdevice?.click();inputvideofilefromdevice.value =''"
+style="border-radius: 50px;border:
+ solid 2px aliceblue;"
+color="danger" fill="solid" shape="round">
+  <i-bs style="color: aliceblue;" name="person-video2"
+            width="35"
+              height="35">
+</i-bs>
+</ion-button>
+<input multiple="false"
+
+ (change)="videochangedfromdevice($event,inputvideofilefromdevice)" hidden 
+#inputvideofilefromdevice accept="video/*" type='file' >
+
+</div>
+
+</div>
+
+  </swiper-slide>
+
+
+
+  <swiper-slide 
+  
+  style="width: 100%;height: 100%;" >
+
+
+  <div style="
+  position: sticky;
+  top: 0;
+  z-index: 999999999;
+  background: black;
+  text-align: center;
+  border-bottom:solid 2px aliceblue ;
+  width: 100%;
+  display: flex;
+  ">
+
+  <div style="width: 100%;">
+
+    <ion-input
+    *ngIf="false"
+    (ionFocus)="focussearchproductinput($event)"
+    (ionBlur)="blursearchproductinput($event)"
+    
+    style="color: aliceblue;" placeholder="Search Products" 
+     type="text" ></ion-input>
+    </div>
+
+    <div>
+
+     <ion-button 
+     *ngIf="!showtogglelocationuser"
+     color="danger" style="
+     border: solid 2px aliceblue;
+     border-radius: 50px;
+     " shape="round" fill="solid"
+     >
+     <i-bs name="search"
+     width="35"
+       height="50">
+</i-bs>
+     </ion-button>
+
+    <ion-toggle 
+    (ionChange)="userchangelocationtoggle($event)"
+    *ngIf="showtogglelocationuser" slot="end">
+      <i-bs style="color: aliceblue;" name="pin-map"
+            width="35"
+              height="35">
+</i-bs>
+    </ion-toggle>
+
+  </div>
+
+
+  </div>
+
+
+
+
+
+
+
+  <ion-grid style="overflow: scroll;
+      height: 100%;
+      padding-bottom: 100px;
+  " fixed
+      *ngIf="activeindexslide === 1"
+  
+  >
+
+
+
+    <ion-row>
+
+
+
+      <ion-col 
+  *ngFor="let item of litofimagesuploded;let i = index;trackBy:trackloopangular"
+      style="height: 360px;border-bottom: solid 2px aliceblue;"
+      size="12">
+
+
+<div style="width: 100%;height: 200px;">
+
+      <ion-card
+      button
+      style="text-align: center;
+      margin: 0;
+    min-height: 200px;
+    height: 200px;
+    background: black;
+    border: solid 2px aliceblue;
+
+    
+      "
+      (click)="viewimagefullscreenc(item?.imageurlsecure)"
+      >
+        <img style="
+        width:100%;
+        height: 200px;
+        padding: 2px;
+        "  [defaultImage]="''" [lazyLoad]="item?.imageurlsecure" alt="">
+    
+  </ion-card>
+</div>
+    
+
+
+    <div style="height: 75px;overflow: scroll;padding: 10px;text-align: center;width: 100%;">
+    <strong style="color: aliceblue;"
+    [innerHTML]='item?.description'
+    >
+    
+    </strong>
+ 
+    <br>
+
+    <div style="display: flex;width: 100%;text-align: center;">
+   
+
+      <div style="width: 100%;display: flex;text-align: center;">
+<div style="width: 100%;">
+
+    <ion-badge color='success' style="
+      border: solid 2px aliceblue;
+      border-radius: 50px;
+      padding: 5px;
+      " mode="ios">
+      <strong style="color: aliceblue;"
+      [innerHTML]='(item?.price  ? item?.price  : 0 ) | miliffynumber: "tonumber"  | number: "1.2-2" | currency'>
+
+      </strong>
+    </ion-badge>
+  </div>
+
+  <div
+
+  style="width: 100%;">
+  <fa-icon style="color: greenyellow;padding-left: 10px;" 
+        
+  class="fa-2x" [icon]="faLocationPin"></fa-icon>
+
+    <ion-badge color='danger' style="
+      border: solid 2px aliceblue;
+      border-radius: 50px;
+      padding: 5px;
+      " mode="ios">
+      <strong style="color: aliceblue;"
+      [innerHTML]='(item?.map    ? item?.map  : [0,0] ) | miliffynumber: "distance":currentuserlocation | number: "1.2-2" '>
+
+      </strong>
+      <span style="color: greenyellow;font-size: 20px;">
+        KM
+      </span>
+    </ion-badge>
+  </div>
+
+  </div>
+
+  </div>
+
+
+    </div>
+
+    
+    <div style="width: 100%;display: flex;text-align: center;gap: 10px;">
+
+      <div >
+        <ion-button
+    style="border: solid 2px aliceblue;border-radius: 50px;width: 100%;padding: 5px;"
+        
+        (click)="openmodalcommentsproducts(item?.assetId,item?.comments)" color="success" fill="solid" shape="round">
+
+        <ion-badge style="border: solid 2px aliceblue;
+        border-radius: 50px;
+        " color="tertiary" mode="ios">
+      <strong style="color: aliceblue;"
+    [innerHTML]="item?.comments?.length | miliffynumber:'number'"
+      
+      >
+
+      </strong>  
+      </ion-badge>
+
+          <i-bs style="color: aliceblue;" name="chat-square-dots"
+            width="35"
+              height="35">
+</i-bs>
+        </ion-button>
+      </div>
+
+      <div style="width: 100%;">
+        <a [href]="'tel:'+item.phonenumber">
+
+    <ion-button 
+    style="border: solid 2px aliceblue;border-radius: 50px;width: 100%;"
+    color="danger" fill="solid" shape="round">
+     <i-bs style="color: aliceblue;" name="telephone-outbound"
+     width="35"
+       height="35">
+    </i-bs>
+    </ion-button>
+  </a>
+
+  </div>
+
+
+  </div>
+    
+      </ion-col>
+      
+    </ion-row>
+  </ion-grid>
+ 
+
+     
+     
+   </swiper-slide>
+
+
+  <swiper-slide style="background: black;overflow: hidden;" >
+
+    <div
+    [hidden]="!showdivplayingaudio"
+    style="
+    position: absolute;
+    z-index: 999999999;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: black;
+    text-align: center;
+    "
+    >
+<audio crossorigin="anonymous" loop hidden id="audiaielplayerid"
+(playing)="playingaudioev()"
+></audio>
+    <ion-button (click)="exitplayingrecordedaiaudio()" 
+    style="
+    border: solid 2px aliceblue;
+    border-radius: 50px;
+    position: fixed;
+    left:  0;
+
+    "
+    color="danger" fill="solid" shape="round">
+    <i-bs name="x-circle"
+    width="35" style="color: aliceblue;"
+      height="35">
+</i-bs>
+    </ion-button>
+
+    <circle-progress
+    
+    [percent]="audioplayingpercentage"
+    [radius]="100"
+    [outerStrokeWidth]="16"
+    [innerStrokeWidth]="8"
+    [outerStrokeColor]="'#800000'"
+    [innerStrokeColor]="'#C7E596'"
+    [animation]="false"
+    [animationDuration]="300"
+    [unitsFontSize]="'50'"
+    [unitsColor]="'#07e43e'"
+  ></circle-progress>
+  <div
+  style="display: flex;width: 100%;text-align: center;"
+  >
+
+  <div style="width: 100%;">
+    <strong style="color: aliceblue;font-size: 50px;" [innerHTML]="currenttimeaudioai">
+
+    </strong>
+  </div>
+
+
+  <div style="width: 100%;">
+   
+    <strong style="color: #800;font-size: 50px;" [innerHTML]="duratioaudioai">
+
+    </strong>
+  </div>
+
+  </div>
+
+
+  <div
+  style="display: flex;width: 100%;text-align: center;position: fixed;bottom: 50px;z-index: 9999999;"
+  >
+
+  <div
+  style="
+  width: 100%;
+  text-align: center;
+  "
+    tappable 
+    (click)="shareaudioaiglobal()"
+  >
+  <i-bs style="color: blueviolet;" name="save"
+  width="50"
+    height="50">
+</i-bs>
+  </div>
+
+
+  <div
+  style="
+  width: 100%;
+  text-align: center;
+  "
+  >
+
+  <div
+  tappable 
+  (click)="pauseplayaudiogenerateai()"
+  >
+  <i-bs
+  *ngIf="!audioaiplaying"
+  style="color: #800;"
+  name="play-circle"
+  width="75"
+    height="75">
+</i-bs>
+<i-bs
+*ngIf="audioaiplaying"
+style="color: rgb(25, 136, 0);"
+name="pause-circle"
+width="75"
+  height="75">
+</i-bs>
+  </div>
+
+  </div>
+
+
+  <div
+  style="
+  width: 100%;
+  text-align: center;
+  "
+  tappable
+  (click)="shareaudioaiglobal()"
+  >
+  <i-bs style="color: #800;" name="share"
+  width="50"
+    height="50">
+</i-bs>
+  </div>
+  
+
+  </div>
+
+
+</div>
+
+<div *ngIf="showspinnerwaitingresponseai" style="position: fixed;top: 35%;width: 100%;text-align: center;z-index: 9999999;">
+
+<ion-spinner name="dots" color="danger" style="scale: 5;"></ion-spinner>
+
+</div>
+
+
+<div
+[hidden]="showdivplayingaudio"
+style="
+position: absolute;
+top: 25%;
+right: 10px;
+    z-index: 999999999;
+    
+"
+
+>
+
+<ion-button
+color="danger"
+(click)="inputimagefileai?.click()"
+style="height: 75px;width: 75px;
+border: solid 5px aliceblue;
+border-radius: 50px;
+"
+shape="round"
+>
+<fa-icon class="fa-2x" [icon]="faImage"></fa-icon>
+
+<input (change)="imageaichanged($event,inputimagefileai)" hidden #inputimagefileai accept="image/*" type='file' >
+</ion-button>
+
+</div>
+
+
+<div
+[hidden]="showdivplayingaudio"
+style="
+position: fixed;
+top: 75%;
+right: 10px;
+    z-index: 999999999;
+    
+"
+*ngIf="false"
+>
+
+<ion-button
+color="danger"
+(click)="openaudiorecording()"
+style="height: 75px;width: 75px;
+border: solid 5px aliceblue;
+border-radius: 50px;
+"
+shape="round"
+*ngIf="!showdivrecordingaudio"
+
+>
+
+<i-bs 
+name="mic"
+            width="35"
+              height="35">
+</i-bs>
+
+</ion-button>
+
+<ion-button
+color="success"
+(click)="stopaudiorecording()"
+style="height: 75px;width: 75px;
+border: solid 5px aliceblue;
+border-radius: 50px;
+"
+shape="round"
+*ngIf="showdivrecordingaudio"
+
+>
+
+<i-bs 
+name="mic-mute"
+            width="35"
+              height="35">
+</i-bs>
+
+</ion-button>
+
+</div>
+
+
+<div style="overflow: scroll;padding-bottom: 150px;height: 100%;width: 100%;">
+
+
+    <div style="
+      width: 90%;
+      padding: 5px;
+      text-align: center;
+      height: auto;
+      border-bottom: solid 2px aliceblue;
+      "
+            *ngFor="let item of listofaihelp;let i = index;trackBy:trackloopangular"
+      
+      >
+
+      <div
+*ngIf="item?.audio"
+style="min-height: 150px;
+height: 150px;
+background: black;"
+>
+<ion-card
+(click)="playingaudio(item?.audio)"
+button
+style="
+
+min-height: 50px;
+height: 75px;
+background: black;
+border: solid 2px aliceblue;
+border-radius: 50px;
+border: solid 2px green;
+    margin-top: 10px;
+  
+"
+>
+<div
+[innerHTML]="item?.svg"
+>
+
+</div>
+</ion-card>
+
+
+<div
+style="display: flex;width: 100%;text-align: center;z-index: 9999999;"
+>
+
+<div
+style="
+width: 100%;
+text-align: center;
+"
+  tappable 
+  (click)="shareaudio(item?.audio)"
+>
+<i-bs style="color: blueviolet;" name="save"
+width='35'
+  height="35">
+</i-bs>
+</div>
+
+
+<div
+style="
+width: 100%;
+text-align: center;
+"
+>
+
+<div
+tappable 
+(click)="playingaudio(item?.audio)"
+>
+<i-bs
+
+style="color: #800;"
+name="play-circle"
+width="50"
+  height="50">
+</i-bs>
+
+</div>
+
+</div>
+
+
+<div
+style="
+width: 100%;
+text-align: center;
+"
+tappable
+(click)="shareaudio(item?.audio)"
+>
+<i-bs style="color: #800;" name="share"
+width="35"
+  height="35">
+</i-bs>
+</div>
+
+
+</div>
+
+
+</div>
+
+<div
+*ngIf="item?.image"
+style="min-height: 250px;
+height: 250px;
+background: black;"
+>
+<ion-card
+
+button
+style="
+
+min-height: 175px;
+height: 175px;
+background: black;
+border: solid 2px yellowgreen;
+    margin-top: 10px;
+"
+(click)="viewimagefullscreen(item)"
+>
+  <img style="height: 100%;width: 100%;position: absolute;left: 0;top: 0;"
+   [defaultImage]="''" [lazyLoad]="item?.image">
+</ion-card>
+
+<div
+style="display: flex;width: 100%;text-align: center;z-index: 9999999;"
+>
+
+<div
+style="
+width: 100%;
+text-align: center;
+"
+  tappable 
+  (click)="shareimage(item?.image)"
+>
+<i-bs style="color: blueviolet;" name="save"
+width='35'
+  height="35">
+</i-bs>
+</div>
+
+
+<div
+style="
+width: 100%;
+text-align: center;
+"
+>
+
+
+
+</div>
+
+
+<div
+style="
+width: 100%;
+text-align: center;
+"
+tappable
+(click)="shareimage(item?.image)"
+>
+<i-bs style="color: #800;" name="share"
+width="35"
+  height="35">
+</i-bs>
+</div>
+
+
+</div>
+
+</div>
+
+
+<div
+*ngIf="item?.text"
+style="min-height: 175px;
+height: 175px;
+background: black;"
+>
+<ion-card
+id="textgeneratedbyaiid"
+button
+style="
+overflow: scroll;
+min-height: 175px;
+height: 175px;
+background: rgb(176, 174, 174);
+border: solid 2px yellowgreen;
+    margin-top: 10px;
+"
+>
+
+  <strong style="
+    text-align: center;
+    white-space: pre-line;
+  color: black;
+    "
+  [innerHTML]="item?.text"
+  >
+
+  </strong>
+
+</ion-card>
+</div>
+
+
+
+
+
+<div
+style="width: 100%;text-align: center;display: flex;padding: 10px;"
+*ngIf="item?.text"
+>
+
+<div
+style="width: 100%;"
+>
+<i-bs
+tappable
+(click)="copytexttoclipboard(item?.text,'textgeneratedbyaiid')"
+name="back" style="color: #800;"
+            width="35"
+              height="35">
+</i-bs>
+</div>
+
+<div
+style="width: 100%;"
+>
+<i-bs
+tappable
+(click)="translatetext(item?.text)"
+name="bounding-box-circles" style="color: aliceblue;"
+            width="35"
+              height="35">
+</i-bs>
+</div>
+
+
+<div
+style="width: 100%;"
+>
+<i-bs 
+tappable
+(click)="sharetext(item?.text)"
+style="color: blueviolet;" name="share"
+width='35'
+  height="35">
+</i-bs>
+</div>
+
+
+</div>
+
+
+    </div>
+
+    <div id="divlastchataiid">
+
+    </div>
+  </div>
+
+
+
+  <div 
+  *ngIf='listofaihelp?.length === 0'
+  style="
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+    top: 25%;
+  
+    ">
+
+<fa-icon style="color: aliceblue;" 
+  
+class="fa-5x" [icon]="faRobot"></fa-icon>
+
+<br>
+<br>
+
+<strong
+style="color: aliceblue;font-size: 50px;"
+>
+Chat with AI
+</strong>
+
+
+    </div>
+
+
+  <div 
+  *ngIf="showhandindex"
+  style="
+    position: absolute;
+    left: 50%;
+    text-align: center;
+    z-index: 1000;
+    top: 50%;
+    transform: rotate(45deg);
+animation: handmovehorisontal 2s infinite;
+animation-direction: alternate;
+    ">
+<i-bs style="
+color: #800;
+
+" name="hand-index"
+width="75"
+  height="75">
+</i-bs>
+    </div>
+
+
+
+<div
+style="
+position: fixed;
+bottom: 0;
+background-color: black;
+height: 120px;
+z-index: 999999;
+
+width: 100%;
+"
+>
+<div
+style="width: 100%;
+height: 50px;
+"
+>
+
+
+<ion-radio-group style="
+display: flex;
+gap: 20px;
+" value="text" 
+(ionChange)="changetypeofhelp($event,imputchatai)"
+>
+  <ion-radio style="border: solid 2px aliceblue;border-radius: 50px;padding: 10px;" value="text" label="text" aria-label="">
+<strong >
+  TEXT
+</strong>
+  </ion-radio>
+  <ion-radio style="border: solid 2px aliceblue;border-radius: 50px;padding: 10px;" value="image" aria-label="">
+    IMAGE
+  </ion-radio>
+
+
+<ion-radio *ngIf="false" style="border: solid 2px aliceblue;border-radius: 50px;padding: 10px;"
+ value="audio" aria-label="">
+  AUDIO
+</ion-radio>
+</ion-radio-group>
+</div>
+
+<div style="width: 100%;display: flex;">
+
+
+<div style="width: 100%;text-align: center;">
+<ion-input
+[counter]="stateofhelp === 'audio'? true : false"
+  [maxlength]="stateofhelp === 'audio'? '200' : undefined"
+#imputchatai
+style="
+  border: solid 2px aliceblue;
+  border-radius: 50px;
+  " type="text" placeholder="How can I help YOU ?"></ion-input>
+</div>
+
+<div>
+  <ion-button
+  *ngIf="!showspinnerwaitingresponseai"
+  
+  (click)="generataihelp(imputchatai)"  color="danger" style="
+    border: solid 2px aliceblue;
+    border-radius: 50px;
+    " fill="solid" shape="round">
+   <i-bs name="send-fill"
+   width="35"
+     height="35">
+</i-bs>
+  </ion-button>
+  <ion-button
+  *ngIf="showspinnerwaitingresponseai"
+  color="danger" style="
+  border: solid 2px aliceblue;
+  border-radius: 50px;
+  " fill="solid" shape="round">
+<ion-spinner style="
+color: aliceblue;
+scale: 1.5;
+" name="dots"></ion-spinner>
+</ion-button>
+</div>
+</div>
+</div>
+
+  </swiper-slide>
+
+
+
+
+
+    <swiper-slide style="background: black;overflow: scroll;" >
+
+
+      <div style="
+      position: sticky;
+      top: 0;
+      z-index: 9999999;
+      background: black;
+      border: solid 2px aliceblue;
+      border-radius: 50px;
+      display: flex;
+      ">
+<div
+style="
+width: 100%;
+"
+>
+
+
+    <ion-input
+    #inputsearchanimerecent
+    style="
+    text-align: center;
+    color: aliceblue;
+    background: black;
+    border-radius: 50px;
+    " type="search" placeholder='SEARCH ANIMES...'></ion-input>
+</div>  
+
+<div>
+<ion-button color="danger" shape="round" style="
+  border: solid 2px aliceblue;
+  border-radius: 50px;
+  " (click)="searchanimerecent(inputsearchanimerecent)">
+
+
+<i-bs name="search"
+          width="35"
+            height="35">
+</i-bs>
+
+</ion-button>
+</div>
+
+</div>
+
+
+      <ion-title style="
+        color: aliceblue;
+        padding: 15px;
+        border-bottom: solid 2px aliceblue;
+        ">
+        <i-bs style="color: #800;" name="clock"
+        width='35'
+          height="35">
+</i-bs>
+        RECENT ANIMES
+      </ion-title>
+
+      <ion-grid
+      *ngIf="activeindexslide === 3"
+      fixed>
+        <ion-row>
+          <ion-col size="12" style="
+            height: 200px;
+            border-bottom: solid 2px aliceblue;
+            "
+            *ngFor="let item of listofrecentanimes;let i = index;trackBy:trackloopangular"
+            >
+          <div style="width: 100%;display: flex;text-align: center;">
+
+
+            <div
+            style="width: 100%;"
+            >
+            <ion-card
+            (click)="fetchanimeinfo(item?.id)"
+            button
+            style="
+            margin: 0;
+            min-height: 175px;
+            height: 175px;
+            background: black;
+            border: solid 2px aliceblue;
+            "
+            >
+              <img style="height: 100%;width: 100%;" [defaultImage]="''" [lazyLoad]="item?.image">
+            </ion-card>
+            </div>
+            <div
+            style="width: 100%;"
+            >
+
+            <div
+            style="
+            width: 100%;
+            height: calc(100% - 75px);
+            overflow: scroll;
+            text-align: center;
+            "
+            >
+            <strong
+            style="color: aliceblue;"
+            [innerHTML]="item?.title"
+            >
+
+            </strong>
+            </div>
+
+            <div
+            style="
+            width: 100%;
+            height: calc(75px);
+            overflow: scroll;
+            text-align: center;
+            "
+            >
+            <ion-button shape="round" color="danger" style="border: solid 2px aliceblue;border-radius: 50px;
+            width: 100%;
+            "
+             (click)="fetchepisodeanimesrc(item?.episodeId);fetchanimeinfowithoutmodal(item?.id)">
+             
+           
+            <strong
+            style="color: aliceblue;
+            font-size: 20px;
+            padding: 10px;
+            "
+            [innerHTML]="item?.episodeNumber"
+            >
+
+            </strong>
+            <i-bs name="play-circle"
+            width="35"
+              height="35">
+</i-bs>
+
+          </ion-button>
+            </div>
+
+          </div>  
+
+
+          </div>  
+          </ion-col>
+          
+        </ion-row>
+      </ion-grid>
+
+
+
+
+    </swiper-slide>
+
+
+
+
+
+
+
+    <swiper-slide style="background: black;overflow: scroll;" >
+
+
+      <ion-title style="
+        color: aliceblue;
+        padding: 15px;
+        border-bottom: solid 2px aliceblue;
+        ">
+        <ion-icon size="large" color="danger" name="flame-outline"></ion-icon>
+         TRENDS ANIMES
+      </ion-title>
+
+      <ion-grid 
+      *ngIf="activeindexslide === 4"
+      fixed>
+        <ion-row>
+          <ion-col size="12" style="
+            height: 200px;
+            border-bottom: solid 2px aliceblue;
+            "
+            *ngFor="let item of listoftrendanime;let i = index;trackBy:trackloopangular"
+            >
+          <div style="width: 100%;display: flex;text-align: center;">
+
+
+            <div
+            style="width: 100%;"
+            >
+            <ion-card
+            button
+            style="
+            margin: 0;
+            min-height: 175px;
+            height: 175px;
+            background: black;
+            border: solid 2px aliceblue;
+            "
+            >
+              <img style="height: 100%;width: 100%;" [defaultImage]="''" [lazyLoad]="item?.image">
+            </ion-card>
+            </div>
+            <div
+            style="width: 100%;"
+            >
+
+            <div
+            style="
+            width: 100%;
+            height: calc(100% - 75px);
+            overflow: scroll;
+            text-align: center;
+            "
+            >
+            <strong
+            style="color: aliceblue;"
+            [innerHTML]="item?.title?.english"
+            >
+
+            </strong>
+            </div>
+
+            <div
+            style="
+            width: 100%;
+            height: calc(75px);
+            overflow: scroll;
+            text-align: center;
+            "
+            >
+            <ion-button shape="round" color="success" style="border: solid 2px aliceblue;border-radius: 50px;
+            width: 100%;
+            "
+             (click)="fetchanimeinfometa(item?.id)">
+             
+           
+            <strong
+            style="color: #800;
+            font-size: 20px;
+            padding: 10px;
+            "
+            [innerHTML]="item?.totalEpisodes"
+            >
+
+            </strong>
+            <i-bs style="color: blue;" name="collection-play"
+            width="35"
+              height="35">
+</i-bs>
+
+          </ion-button>
+            </div>
+
+          </div>  
+
+
+          </div>  
+          </ion-col>
+          
+        </ion-row>
+      </ion-grid>
+
+
+    </swiper-slide>
+
+
+    
+    <swiper-slide style="background: black;overflow: scroll;" >
+
+      <ion-title style="
+      color: aliceblue;
+      padding: 15px;
+      border-bottom: solid 2px aliceblue;
+      ">
+        <i-bs style="color: #800;" name="people"
+        width='35'
+          height="35">
+</i-bs>
+      POPULAIRE ANIMES
+    </ion-title>
+
+      <ion-grid 
+      *ngIf="activeindexslide === 5"
+      fixed>
+        <ion-row>
+          <ion-col size="12" style="
+            height: 200px;
+            border-bottom: solid 2px aliceblue;
+            "
+            *ngFor="let item of listofpopularanime;let i = index;trackBy:trackloopangular"
+            >
+          <div style="width: 100%;display: flex;text-align: center;">
+
+
+            <div
+            style="width: 100%;"
+            >
+            <ion-card
+            (click)="fetchanimeinfometa(item?.id)"
+
+            button
+            style="
+            margin: 0;
+            min-height: 175px;
+            height: 175px;
+            background: black;
+            border: solid 2px aliceblue;
+            "
+            >
+              <img style="height: 100%;width: 100%;" [defaultImage]="''" [lazyLoad]="item?.image">
+            </ion-card>
+            </div>
+            <div
+            style="width: 100%;"
+            >
+
+            <div
+            style="
+            width: 100%;
+            height: calc(100% - 75px);
+            overflow: scroll;
+            text-align: center;
+            "
+            >
+            <strong
+            style="color: aliceblue;"
+            [innerHTML]="item?.title?.english"
+            >
+
+            </strong>
+            </div>
+
+            <div
+            style="
+            width: 100%;
+            height: calc(75px);
+            overflow: scroll;
+            text-align: center;
+            "
+            >
+            <ion-button shape="round" color="success" 
+            style="border: solid 2px aliceblue;border-radius: 50px;
+            width: 100%;
+            "
+             (click)="fetchanimeinfometa(item?.id)"
+             >
+             
+           
+            <strong
+            style="color: #800;
+            font-size: 20px;
+            padding: 10px;
+            "
+            [innerHTML]="item?.totalEpisodes"
+            >
+
+            </strong>
+            <i-bs style="color: blue;" name="collection-play"
+            width="35"
+              height="35">
+</i-bs>
+
+          </ion-button>
+            </div>
+
+          </div>  
+
+
+          </div>  
+          </ion-col>
+          
+        </ion-row>
+      </ion-grid>
+
+    
+    </swiper-slide>
+
+    <swiper-slide style="background: black;overflow: scroll;" >
+
+
+      <div style="
+      position: sticky;
+      top: 0;
+      z-index: 9999999;
+      background: black;
+      border: solid 2px aliceblue;
+      border-radius: 50px;
+      display: flex;
+      ">
+<div
+style="
+width: 100%;
+"
+>
+
+
+    <ion-input
+    #inputsearchmovieseries
+    style="
+    text-align: center;
+    color: aliceblue;
+    background: black;
+    border-radius: 50px;
+    " type="search" placeholder='SEARCH MOVIES & SERIES...'></ion-input>
+</div>  
+
+<div>
+<ion-button color="danger" shape="round" style="
+  border: solid 2px aliceblue;
+  border-radius: 50px;
+  " (click)="searchmovieseries(inputsearchmovieseries)">
+
+
+<i-bs name="search"
+          width="35"
+            height="35">
+</i-bs>
+
+</ion-button>
+</div>
+
+</div>
+
+      <ion-title style="
+      color: aliceblue;
+      padding: 15px;
+      border-bottom: solid 2px aliceblue;
+      ">
+        <i-bs style="color: #800;" name="collection"
+        width='35'
+          height="35">
+</i-bs>
+      TV SERIES
+    </ion-title>
+
+      <ion-grid 
+      *ngIf="activeindexslide === 6"
+      fixed>
+        <ion-row>
+          <ion-col size="12" style="
+            height: 200px;
+            border-bottom: solid 2px aliceblue;
+            "
+            *ngFor="let item of listoftvshow;let i = index;trackBy:trackloopangular"
+            >
+          <div style="width: 100%;display: flex;text-align: center;">
+
+
+            <div
+            style="width: 100%;"
+            >
+            <ion-card
+            (click)="fetchtvshowormovieinfo(item?.id)"
+            button
+            style="
+            margin: 0;
+            min-height: 175px;
+            height: 175px;
+            background: black;
+            border: solid 2px aliceblue;
+            "
+            >
+              <img style="height: 100%;width: 100%;" [defaultImage]="''" [lazyLoad]="item?.image">
+            </ion-card>
+            </div>
+            <div
+            style="width: 100%;"
+            >
+
+            <div
+            style="
+            width: 100%;
+            height: calc(100% - 75px);
+            overflow: scroll;
+            text-align: center;
+            "
+            >
+            <strong
+            style="color: aliceblue;"
+            [innerHTML]="item?.title"
+            >
+
+            </strong>
+            </div>
+
+            <div
+            style="
+            width: 100%;
+            height: calc(75px);
+            overflow: scroll;
+            text-align: center;
+            "
+            >
+            <ion-button shape="round" color="success" style="border: solid 2px aliceblue;border-radius: 50px;
+            width: 100%;
+            "
+             (click)="fetchtvshowormovieinfo(item?.id)">
+             
+           
+            <strong
+            style="color: #800;
+            font-size: 20px;
+            padding: 10px;
+            "
+            [innerHTML]="item?.lastEpisodes"
+            >
+
+            </strong>
+            <i-bs style="color: blue;" name="collection-play"
+            width="35"
+              height="35">
+</i-bs>
+
+          </ion-button>
+            </div>
+
+          </div>  
+
+
+          </div>  
+          </ion-col>
+          
+        </ion-row>
+      </ion-grid>
+
+    
+    </swiper-slide>
+
+
+
+
+    <swiper-slide style="background: black;overflow: scroll;" >
+
+      <ion-title style="
+      color: aliceblue;
+      padding: 15px;
+      border-bottom: solid 2px aliceblue;
+      ">
+        <i-bs style="color: #800;" name="display"
+        width='35'
+          height="35">
+</i-bs>
+      MOVIES
+    </ion-title>
+
+      <ion-grid 
+      *ngIf="activeindexslide === 7"
+      fixed>
+        <ion-row>
+          <ion-col size="12" style="
+            height: 200px;
+            border-bottom: solid 2px aliceblue;
+            "
+            *ngFor="let item of listofmovies;let i = index;trackBy:trackloopangular"
+            >
+          <div style="width: 100%;display: flex;text-align: center;">
+
+
+            <div
+            style="width: 100%;"
+            >
+            <ion-card
+            (click)="fetchtvshowormovieinfo(item?.id)"
+            button
+            style="
+            margin: 0;
+            min-height: 175px;
+            height: 175px;
+            background: black;
+            border: solid 2px aliceblue;
+            "
+            >
+              <img style="height: 100%;width: 100%;" [defaultImage]="''" [lazyLoad]="item?.image">
+            </ion-card>
+            </div>
+            <div
+            style="width: 100%;"
+            >
+
+            <div
+            style="
+            width: 100%;
+            height: calc(100% - 75px);
+            overflow: scroll;
+            text-align: center;
+            "
+            >
+            <strong
+            style="color: aliceblue;"
+            [innerHTML]="item?.title"
+            >
+
+            </strong>
+            </div>
+
+            <div
+            style="
+            width: 100%;
+            height: calc(75px);
+            overflow: scroll;
+            text-align: center;
+            "
+            >
+            <ion-button shape="round" color="danger" style="border: solid 2px aliceblue;border-radius: 50px;
+            width: 100%;
+            "
+             (click)="fetchtvshowormovieinfo(item?.id)">
+             
+           
+            <strong
+            style="color: aliceblue;
+            font-size: 20px;
+            padding: 10px;
+            "
+            [innerHTML]="item?.duration"
+            >
+
+            </strong>
+            <i-bs style="color: green;" name="collection"
+            width="35"
+              height="35">
+</i-bs>
+
+          </ion-button>
+            </div>
+
+          </div>  
+
+
+          </div>  
+          </ion-col>
+          
+        </ion-row>
+      </ion-grid>
+
+    
+    </swiper-slide>
+
+
+
+    <swiper-slide style="background: black;overflow: scroll;" >
+
+      <ion-title style="
+      color: aliceblue;
+      padding: 15px;
+      border-bottom: solid 2px aliceblue;
+      ">
+         <ion-icon size="large" color="danger" name="flame-outline"></ion-icon>
+
+    TRENDS MOVIES
+    </ion-title>
+
+      <ion-grid 
+      *ngIf="activeindexslide === 8"
+      fixed>
+        <ion-row>
+          <ion-col size="12" style="
+            height: 200px;
+            border-bottom: solid 2px aliceblue;
+            "
+            *ngFor="let item of listofmoviestrends;let i = index;trackBy:trackloopangular"
+            >
+          <div style="width: 100%;display: flex;text-align: center;">
+
+
+            <div
+            style="width: 100%;"
+            >
+            <ion-card
+            (click)="fetchtvshowormovieinfo(item?.id)"
+            button
+            style="
+            margin: 0;
+            min-height: 175px;
+            height: 175px;
+            background: black;
+            border: solid 2px aliceblue;
+            "
+            >
+              <img style="height: 100%;width: 100%;" [defaultImage]="''" [lazyLoad]="item?.image">
+            </ion-card>
+            </div>
+            <div
+            style="width: 100%;"
+            >
+
+            <div
+            style="
+            width: 100%;
+            height: calc(100% - 75px);
+            overflow: scroll;
+            text-align: center;
+            "
+            >
+            <strong
+            style="color: aliceblue;"
+            [innerHTML]="item?.title"
+            >
+
+            </strong>
+            </div>
+
+            <div
+            style="
+            width: 100%;
+            height: calc(75px);
+            overflow: scroll;
+            text-align: center;
+            "
+            >
+            <ion-button shape="round" color="danger" style="border: solid 2px aliceblue;border-radius: 50px;
+            width: 100%;
+            "
+             (click)="fetchtvshowormovieinfo(item?.id)">
+             
+           
+            <strong
+            style="color: aliceblue;
+            font-size: 20px;
+            padding: 10px;
+            "
+            [innerHTML]="item?.duration"
+            >
+
+            </strong>
+            <i-bs style="color: green;" name="collection"
+            width="35"
+              height="35">
+</i-bs>
+
+          </ion-button>
+            </div>
+
+          </div>  
+
+
+          </div>  
+          </ion-col>
+          
+        </ion-row>
+      </ion-grid>
+
+    
+    </swiper-slide>
+
+
+    <swiper-slide style="background: black;overflow: scroll;" >
+
+      <div style="
+        position: sticky;
+        top: 0;
+        z-index: 9999999;
+        background: black;
+        border: solid 2px aliceblue;
+        border-radius: 50px;
+        display: flex;
+        ">
+<div
+style="
+width: 100%;
+"
+>
+
+
+      <ion-input
+      #inputsearchmusicel
+      style="
+      text-align: center;
+      color: aliceblue;
+      background: black;
+      border-radius: 50px;
+      " type="search" placeholder='SEARCH MUSIC...'></ion-input>
+ </div>  
+  
+ <div>
+  <ion-button color="danger" shape="round" style="
+    border: solid 2px aliceblue;
+    border-radius: 50px;
+    " (click)="searchmusic(inputsearchmusicel)">
+
+
+  <i-bs name="search"
+            width="35"
+              height="35">
+</i-bs>
+
+</ion-button>
+ </div>
+  
+  </div>
+
+      <ion-title style="
+      color: aliceblue;
+      padding: 15px;
+      border-bottom: solid 2px aliceblue;
+      ">
+         <ion-icon size="large" color="danger" name="flame-outline"></ion-icon>
+
+    New Release Music
+    </ion-title>
+
+    <div
+    style="width: 100%;
+    height: 25%;
+     
+      overflow: scroll;
+      position: sticky;
+      z-index: 99999;
+      background: black;
+      top: 50px;
+      border-bottom: solid 2px aliceblue;
+    "
+      *ngIf='listoftracks?.length > 0 '
+      
+[hidden]='!listoftracks[0]?.preview_url'
+    
+    
+    >
+
+
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="4"
+        *ngFor="let item of listoftracks;let i = index;trackBy:trackloopangular"
+[hidden]='!item?.preview_url'
+        >
+        <div
+        style="width: 200px;text-align: center;background:black"
+        tappable
+        
+        >
+        
+        
+        
+        <ion-avatar
+        *ngIf="item?.preview_url"
+        (click)="listentotrack(item?.preview_url,item?.album?.images[0].url ? item?.album?.images[0].url  : globaltracksimage)"
+        
+        button
+        style="
+        border: #800 solid 2px;
+        height: 100px;
+        width: 100px;
+        background: black;
+        border-radius: 50px;
+        " slot="start">
+          <img style="background: black;border: #800 solid 2px;" [defaultImage]="''" [lazyLoad]="item?.album?.images[0].url ? item?.album?.images[0].url  : globaltracksimage" />
+        </ion-avatar>
+        
+        
+        
+        
+        
+        
+        
+        </div>
+      </ion-col>
+       
+      </ion-row>
+    </ion-grid>
+
+ 
+</div>
+
+
+      <ion-grid 
+      *ngIf="activeindexslide === 9"
+      fixed>
+        <ion-row>
+          <ion-col size="12" style="
+            height: 275px;
+            border-bottom: solid 2px aliceblue;
+            "
+            *ngFor="let item of listofnewspotifyreleasealbum;let i = index;trackBy:trackloopangular"
+            >
+
+            <ion-title
+            style="margin: 20px;">
+              <strong
+              style="color: aliceblue;"
+              [innerHTML]="item?.name"
+              >
+  
+              </strong>
+         
+            </ion-title>
+
+          <div style="width: 100%;display: flex;text-align: center;">
+
+
+            <div
+            style="width: 100%;"
+            >
+            <ion-card
+            (click)="getnewreleasespotifytracks(item?.id,item?.images[0]?.url)"
+            button
+            style="
+            margin: 0;
+            min-height: 175px;
+            height: 175px;
+            background: black;
+            border: solid 2px aliceblue;
+            "
+            >
+              <img style="height: 175px;width: 100%;" [defaultImage]="''" [lazyLoad]="item?.images[0]?.url">
+            </ion-card>
+            </div>
+            <div
+            style="width: 100%;"
+            >
+
+            <div
+            style="
+            width: 100%;
+            height: 50%;
+            overflow: scroll;
+            text-align: center;
+            "
+            >
+            <ion-button shape="round" color="danger" style="border: solid 2px aliceblue;border-radius: 50px;
+            width: 100%;
+            "
+             (click)="searchlongmusic(item)"
+             >
+             
+    
+        
+            <i-bs name="search"
+            width="35"
+              height="35">
+</i-bs>
+
+          </ion-button>
+            </div>
+
+            <div
+            style="
+            width: 100%;
+            height: 50%;
+            overflow: scroll;
+            text-align: center;
+            "
+            >
+            <ion-button shape="round" color="success" style="border: solid 2px aliceblue;border-radius: 50px;
+            width: 100%;
+            "
+             (click)="getnewreleasespotifytracks(item?.id,item?.images[0]?.url)"
+             >
+             
+             <strong
+             style="color: aliceblue;font-size: 20px;padding: 10px;"
+             [innerHTML]="item?.total_tracks"
+             >
+ 
+             </strong>
+        
+            <i-bs style="color: #800;"  name="collection"
+            width="35"
+              height="35">
+</i-bs>
+
+          </ion-button>
+            </div>
+
+          </div>  
+
+
+          </div>  
+          </ion-col>
+          
+        </ion-row>
+      </ion-grid>
+
+    
+    </swiper-slide>
+
+
+    <swiper-slide style="background: black;overflow: scroll;" >
+
+
+      <ion-title style="
+      color: aliceblue;
+      padding: 15px;
+      border-bottom: solid 2px aliceblue;
+      ">
+      <i-bs name="newspaper"
+      width="50" style="color: #800;"
+        height="50">
+</i-bs>
+
+    News
+    </ion-title>
+
+    <ion-item
+    style="
+    border: solid 2px aliceblue;
+    --background: rgb(0, 0, 0 , 0.5);
+    color: aliceblue;
+    border-radius: 50px;
+    position: sticky;
+        z-index: 9999;
+        left: 0;
+        max-width: 50%;
+        width: 50%;
+        top: 0;
+    "
+    *ngIf="categoriesnews?.length > 0 "
+    >
+     
+    
+    
+           
+            <ion-select
+            (ionChange)="selectcategorieofnews($event)"
+            [value]="categoriesnews[0]" multiple="false"
+             [placeholder]="categoriesnews[0]">
+              <ion-select-option
+              *ngFor="let item of categoriesnews"
+              [value]="item">
+            <strong style="color: aliceblue;">
+              {{item | uppercase}}
+            </strong> 
+            </ion-select-option>
+    
+    
+    
+     
+              
+            </ion-select>
+    
+         
+    
+          </ion-item>
+
+
+      <ion-grid 
+      *ngIf="activeindexslide === 10"
+      fixed>
+        <ion-row>
+          <ion-col size="12" style="
+            height: 400px;
+            border-bottom: solid 2px aliceblue;
+            "
+            *ngFor="let item of listofnews;let i = index;trackBy:trackloopangular"
+            >
+
+            <div
+            style="margin: 20px;
+            box-shadow: 2px 2px 10px #246756;
+            padding: 2em;
+            ">
+              <strong
+              style="color: aliceblue;
+                
+
+                display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+
+              "
+              [innerHTML]="item?.title"
+              >
+  
+              </strong>
+         
+            </div>
+
+          <div style="width: 100%;display: flex;text-align: center;">
+
+
+            <div
+            style="width: 100%;"
+            >
+            <ion-card
+            
+            button
+            style="
+            margin: 0;
+            min-height: 175px;
+            height: 175px;
+            background: black;
+            border: solid 2px aliceblue;
+            "
+            >
+              <img style="height: 175px;width: 100%;" [defaultImage]="''" [lazyLoad]="item?.image_url">
+            </ion-card>
+            </div>
+            <div
+            style="width: 100%;
+            height: 175px;overflow: scroll;
+            text-align: center;
+           
+
+
+            "
+            >
+
+        <strong style="
+        color: aliceblue;
+   
+        "
+        [innerHTML]="item?.content"
+        >
+
+        </strong>
+
+      </div>  
+
+
+
+
+
+
+          </div>  
+          <div style="
+          height: 50px;
+          text-align: end;
+          padding: 10px;
+          display: flex;
+          width: 100%;
+          ">
+
+          <div
+          style="width: 100%;"
+          tappable
+          (click)="sharetext(item?.content)"
+          >
+            <fa-icon style="color: greenyellow;padding-left: 10px;" 
+        
+            class="fa-2x" [icon]="faShare"></fa-icon>
+          </div>
+  
+  <div
+  style="width: 100%;"
+  
+  >
+
+  <ion-badge color="danger" mode="ios">
+    <strong  [innerHTML]="item?.created_at | timeago | uppercase">
+  
+    </strong>
+  </ion-badge>
+</div>
+
+  </div>
+          </ion-col>
+          
+        </ion-row>
+      </ion-grid>
+
+    
+    </swiper-slide>
+
+
+  </swiper-container>
+
+
+
+  <div  
+  [hidden]="!showplayervideo"
+  style="
+    position: fixed;
+    top: 0;
+    z-index: 99999999;
+    height: 100%;
+    width: 100%;
+    background: black;
+
+  "
+[style.height]="minimiseplayer ? ' 30%' : ' 100%'"
+[style.width]="minimiseplayer ? ' 50%' : ' 100%'"
+[style.top]="minimiseplayer ? 'unset' : '0'"
+[style.bottom]="minimiseplayer ? '50%' : 'unset'"
+[style.borderRadius]="minimiseplayer ? '50px' : 'unset'"
+[style.border]="minimiseplayer ? 'solid 5px blue' : 'unset'"
+
+
+
+[style.transform]="minimiseplayer ? '' : 'unset'"
+
+
+  id="fullscreenvideo" >
+
+
+  <div 
+  style="
+  position: absolute;
+  z-index: 999999;
+  top: 10%;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+"
+*ngIf="!minimiseplayer"
+  >
+  <div>
+
+  <ion-button 
+(click)="exitvideoplayer()"
+  
+  color="danger" shape="round"  >
+
+
+<i-bs 
+tappable
+name="x-circle"
+width="25"
+  height="25">
+</i-bs>
+</ion-button>
+</div>
+
+<div 
+*ngIf="!videorecordingstart"
+>
+
+  <ion-button
+  (click)="minimiseplayer = true"
+  color="danger" shape="round"  >
+
+
+<i-bs 
+
+tappable
+name="chevron-bar-down"
+width="25"
+  height="25">
+</i-bs>
+</ion-button>
+</div>
+
+
+</div>
+
+
+  <div
+  style="
+  display: flex;
+  position: absolute;right: 0;
+  z-index: 99999999999;
+
+  "
+[style.display]="minimiseplayer ? 'none' : 'flex'"
+
+  >
+  <ion-item
+  style="
+  border: solid 2px aliceblue;
+  --background: rgb(0, 0, 0 , 0.5);
+  color: aliceblue;
+  border-radius: 50px;
+  "
+  *ngIf="listofsubtitles?.length> 0 "
+  >
+   
+  
+  
+         
+          <ion-select
+          (ionChange)="selectsubtitlesofvideo($event)"
+          [value]="listofsubtitles[0]?.url" multiple="false" [placeholder]="listofsubtitles[0]?.quality">
+            <ion-select-option
+            *ngFor="let item of listofsubtitles"
+            [value]="item?.url">
+          <strong style="color: aliceblue;">
+            {{item?.lang}}
+          </strong> 
+          </ion-select-option>
+
+
+
+          <ion-select-option
+          
+          [value]="'off'">
+        <strong style="color: aliceblue;">
+          OFF
+        </strong> 
+        </ion-select-option>
+            
+          </ion-select>
+
+       
+  
+        </ion-item>
+
+<ion-item
+style="
+border: solid 2px aliceblue;
+--background: rgb(0, 0, 0 , 0.5);
+color: aliceblue;
+border-radius: 50px;
+"
+*ngIf="listofvideoqualities?.length> 0 "
+>
+
+
+
+   
+    <ion-select
+    (ionChange)="selectqualityofplayer($event)"
+    [value]="listofvideoqualities[0]?.url" multiple="false" [placeholder]="listofvideoqualities[0]?.quality">
+      <ion-select-option
+      *ngFor="let item of listofvideoqualities"
+      [value]="item?.url">
+    <strong style="color: aliceblue;">
+      {{item?.quality}}
+    </strong> 
+    </ion-select-option>
+      
+    </ion-select>
+
+  </ion-item>
+</div>
+
+
+
+<canvas
+hidden
+style="width: 100%;height: 100%;border: solid 2px aliceblue;"
+ id="canvassnapshot" width="1980" height="1980" ></canvas>
+
+<div
+[hidden]="!videorecordingstart"
+*ngIf="videorecordingstart"
+style="
+position: fixed;bottom: 25px;z-index: 99999;
+width: 100%;text-align: center;
+
+height: 20%;
+background: black;
+"
+>
+
+<div style="width: 100%;text-align: center;display: flex;">
+
+<div style="width: 100%;">
+  <ion-button
+  
+(click)="opencameravideo(true)"
+  
+      color="danger" fill="solid" style="
+        border: solid 2px aliceblue;
+        border-radius: 50px;
+        " shape="round">
+     
+     <fa-icon class="fa-3x" [icon]="faMusic"></fa-icon>
+    </ion-button>
+</div>
+
+
+<div>
+  <ion-button 
+  fill="clear"
+
+  style="border: solid 2px aliceblue;border-radius: 50px;"
+  color="danger" *ngIf="!videorecordingstartbyuser" (click)="startrecordingvideo()">
+    <i-bs name="circle"
+            width="50"
+              height="50">
+</i-bs>
+  </ion-button>
+
+  <ion-button
+
+  class='colorbiteclass'
+  style="border: solid 2px aliceblue;border-radius: 50px;"
+  fill="clear"
+  color="success" *ngIf="videorecordingstartbyuser" (click)="stoprecordingvideo()">
+    <i-bs style="color: aliceblue;"  name="stop-circle"
+            width="50"
+              height="50">
+</i-bs>
+  </ion-button>
+</div>
+
+
+<div style="width: 100%;text-align: right;">
+
+  <ion-button 
+  fill="clear"
+
+  style="border: solid 2px aliceblue;border-radius: 50px;"
+  [color]="!lightblubcamera ? 'danger':'success'"  (click)="torchstateonoff()">
+    <i-bs [style]="!lightblubcamera ? 'crimson':'yellowgreen'"
+    *ngIf="!lightblubcamera"
+    name="lightbulb"
+            width="35"
+              height="35">
+</i-bs>
+<i-bs
+style="color: aliceblue;"
+*ngIf="lightblubcamera"
+name="lightbulb-off"
+        width="35"
+          height="35">
+</i-bs>
+  </ion-button>
+</div>
+
+</div>
+
+<div style="width: 100%;text-align: center;display: flex;gap: 10px;">
+
+
+  <div>
+    <ion-button (click)="takesnapshotvideo()" color="success"
+    style="border: solid 2px aliceblue;
+    border-radius: 50px;
+    "
+    fill="solid" shape="round">
+     
+  <i-bs style="color: aliceblue;" name="camera2"
+              width="25"
+                height="25">
+  </i-bs>
+  </ion-button>
+  
+  </div>
+
+
+<div>
+  <ion-button
+  *ngIf="audiouserstreamenabled"
+  (click)="muteaudiouserrecording()" color="success"
+  style="border: solid 2px aliceblue;
+  border-radius: 50px;
+  "
+  fill="solid" shape="round">
+   
+<i-bs style="color: aliceblue;" name="mic-mute"
+            width="25"
+              height="25">
+</i-bs>
+</ion-button>
+
+<ion-button
+*ngIf="!audiouserstreamenabled"
+(click)="muteaudiouserrecording()" color="danger"
+style="border: solid 2px aliceblue;
+border-radius: 50px;
+"
+fill="solid" shape="round">
+ 
+<i-bs style="color: aliceblue;" name="mic"
+          width="25"
+            height="25">
+</i-bs>
+</ion-button>
+
+</div>
+
+<div>
+  <ion-button
+  *ngIf="addmusictovideorecording"
+  (click)="addmusictovideo()" color="success"
+  style="border: solid 2px aliceblue;
+  border-radius: 50px;
+  "
+  fill="solid" shape="round"> 
+   
+<i-bs style="color: aliceblue;" name="music-note-beamed"
+            width="25"
+              height="25">
+</i-bs>
+</ion-button>
+
+
+</div>
+
+
+<div>
+  <ion-button
+  *ngIf="videouserstreamenabled"
+  (click)="mutevideouserrecording()" color="success"
+  style="border: solid 2px aliceblue;
+  border-radius: 50px;
+  "
+  fill="solid" shape="round">
+   
+<i-bs style="color: aliceblue;" name="camera-video-off"
+            width="25"
+              height="25">
+</i-bs>
+</ion-button>
+
+<ion-button
+*ngIf="!videouserstreamenabled"
+(click)="mutevideouserrecording()" color="danger"
+style="border: solid 2px aliceblue;
+border-radius: 50px;
+"
+fill="solid" shape="round">
+ 
+<i-bs style="color: aliceblue;" name="camera-video"
+          width="25"
+            height="25">
+</i-bs>
+</ion-button>
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<div
+
+style="
+height: 75%;
+
+"
+[style.height]="minimiseplayer ? '100%' : '75%'"
+>
+
+<div 
+*ngIf="!videorecordingstart" 
+
+[style.display]="minimiseplayer ? 'none' : 'flex'"
+
+style="position: absolute;right: 0;bottom: 250px;display: flex;flex-direction: column;gap: 10px;z-index: 999999999;">
+
+  <div
+
+*ngIf="!sendimagegif" 
+  
+  >
+
+  <ion-button 
+*ngIf="!videorecordingstart && !showvideorecordedbuttonsdiv" 
+
+  (click)="sendvideotoothershls('hls')"
+  color="danger" style="border: solid 2px aliceblue;border-radius: 50px;width: 100%;" fill="solid" shape="round">
+  
+  <fa-icon class="fa-2x" [icon]="faArrowLeft"></fa-icon>
+
+  </ion-button>
+</div>
+
+<div
+*ngIf="!sendimagegif" 
+
+>
+
+  <ion-button 
+  *ngIf="!videorecordingstart && !showvideorecordedbuttonsdiv" 
+  
+    (click)="sendvideotoothershlssocial()"
+    color="danger" style="border: solid 2px aliceblue;border-radius: 50px;width: 100%;" fill="solid" shape="round">
+    
+    <fa-icon class="fa-2x" [icon]="faArrowRightToBracket"></fa-icon>
+  
+    </ion-button>
+  </div>
+
+  </div>
+
+    <vg-player
+   
+    (onPlayerReady)="playervideogularready($event)"
+    style="height: 100%;"
+    
+[style.borderRadius]="minimiseplayer ? '50px' : 'unset'"
+    
+   
+    >
+
+   
+
+ 
+
+ <div
+*ngIf="showspinnerwaitingforvideotoplay" 
+ style="width: 100%;position: absolute;top: 50% ;text-align: center;
+z-index: 999999999; 
+ 
+ "
+ >
+
+<ion-spinner
+[style.scale]="minimiseplayer ? '2' : '5'"
+
+name="dots" color="danger" style="
+z-index: 999999999; 
+
+"></ion-spinner>
+
+</div>
+
+
+   
+
+<div style="
+position: absolute;
+bottom: 0;
+height: 50px;
+width: 100%;
+z-index: 1;
+" 
+
+
+[style.height]="minimiseplayer ? '15px' : '50px'"
+
+id="canvaeldivid">
+</div>
+   
+      
+<div
+*ngIf="!sendimagegif"
+>
+
+        <vg-controls
+[style.display]="minimiseplayer ? 'none' : 'flex'"
+*ngIf="!videorecordingstart" 
+        
+        vgFor="videoplayerelid" [vgAutohide]="true" [vgAutohideTime]="5">
+          <vg-time-display vgFor="videoplayerelid" [vgProperty]="'current'" [vgFormat]="'hh:mm:ss'"></vg-time-display>
+      
+          
+
+
+          <vg-scrub-bar  >
+          <vg-scrub-bar-current-time style="
+                background: #800;
+    z-index: 999999999999;
+
+            " vgFor="videoplayerelid" [vgSlider]="true"></vg-scrub-bar-current-time>
+
+
+ 
+            <vg-scrub-bar-buffering-time style="
+              background: #800;
+              border-radius: 50px;
+              " vgFor="videoplayerelid"></vg-scrub-bar-buffering-time>
+        </vg-scrub-bar>
+
+        <vg-time-display vgFor="videoplayerelid" [vgProperty]="'total'" [vgFormat]="'hh:mm:ss'"></vg-time-display>
+
+    </vg-controls>
+  </div>
+
+<img
+*ngIf="false"
+[defaultImage]="''" [lazyLoad]="globaltracksimageposter"
+ style="
+  width: 100%;height: 100%;
+      object-fit: fill;
+      pointer-events:auto;
+      height: calc(100%);
+      z-index: 9999999999;
+      position: absolute;
+" alt="">
+
+      <video
+      style="
+      width: 100%;height: 100%;
+      object-fit: fill;
+      pointer-events:auto;
+      height: calc(100%);
+      "
+      loop
+      (click)="pauseplayvideoplayer()"
+      [controls]="false"
+      [poster]="globaltracksimageposter"
+      #videoplayerel
+             #vgDash="vgDash"
+             [vgMedia]="$any(videoplayerel)"
+             [vgDash]="currentStreamplaying"
+             [vgHls]="currentStreamplaying"
+             id="videoplayerelid"
+             controls
+             crossorigin
+             (playing)="playingvideo()"
+             >
+             <track style="
+             color: #800;
+             "
+            #videoplayereltrack
+             [src]="videosubtitleschoosed" kind="subtitles"  default>
+      </video>
+
+
+
+
+</vg-player>
+
+</div>
+
+
+<div 
+*ngIf="sendimagegif" 
+
+[style.display]="minimiseplayer ? 'none' : 'flex'"
+
+style="position: absolute;right: 0;bottom: 250px;display: flex;
+flex-direction: column;gap: 10px;z-index: 999999999;
+background-color: rgb(0, 0, 0 , 0.5);
+background: rgb(0, 0, 0 , 0.5);
+color: aliceblue;
+border: solid 2px aliceblue;
+border-radius: 50px;
+">
+
+<ion-input 
+#inputpriceproduct
+style="text-align: center;color: aliceblue;" type="number" placeholder="Enter Price" ></ion-input>
+
+</div>
+
+<div
+*ngIf="showvideorecordedbuttonsdiv"
+style="
+width: 100%;
+height: 25%;
+overflow: hidden;
+"
+[hidden]="minimiseplayer"
+
+>
+
+<div style="
+height: 60%;
+">
+  <ion-item style="
+      height: 100%;
+    --background: black;
+    text-align: center;
+    color: aliceblue;
+  ">
+    <ion-textarea style="
+        height: 100%;
+    text-align: center;
+    color: aliceblue;
+    border: solid 2px aliceblue;
+    " 
+    #descriptioninput
+    labelPlacement="floating" fill="outline" label="Enter Informations ..."></ion-textarea>
+  </ion-item>
+</div>
+
+<div 
+style="width: 100%;
+height: 50%;
+display: flex;
+  flex-wrap: nowrap; 
+  overflow: auto;
+  gap: 25px;
+"
+*ngIf="showvideorecordedbuttonsdiv"
+[style.display]="minimiseplayer ? 'none' : 'flex'"
+>
+
+
+<div >
+
+  <ion-button 
+  (click)='this.gotocordinnate = false;showmodalmap = true'
+  color="danger" style="border: solid 2px aliceblue;border-radius: 50px;" fill="solid" shape="round">
+   LOCATION
+  <fa-icon style="color: greenyellow;padding-left: 10px;" class="fa-2x" [icon]="faLocationPin"></fa-icon>
+
+  </ion-button>
+  </div>
+
+<div style="width: 100%;">
+
+<ion-button 
+(click)="sendvideotoothers('mp4',descriptioninput,inputpriceproduct)"
+color="danger" style="border: solid 2px aliceblue;border-radius: 50px;width: 100%;" fill="solid" shape="round">
+  SEND
+</ion-button>
+</div>
+
+</div>
+
+</div>
+
+
+
+ 
+  <div
+style="width: 100%;
+height: 25%;
+display: flex;
+  flex-wrap: nowrap;
+  overflow: auto;
+  gap: 25px;
+"
+  *ngIf="!videorecordingstart"
+  [style.display]="minimiseplayer ? 'none' : 'flex'"
+
+
+>
+
+<ion-spinner
+*ngIf="showspinnerwaitinganimeinfo"
+color='danger' style="
+    position: absolute;
+    z-index: 999999999;
+    scale: 5;
+    left: 50%;
+    color: crimson;
+
+" name="dots"></ion-spinner>
+<div
+style="width: 175px;text-align: center;"
+*ngFor="let item of animeinfo?.episodes;let i = index;trackBy:trackloopangular"
+
+>
+
+
+
+<ion-card
+button
+style="
+margin: 0;
+min-height: 100%;
+height: 100%;
+background: black;
+border: solid 2px aliceblue;
+width: 175px;
+border-radius: 50px;
+"
+(click)="fetchepisodeanimesrc(item?.id)"
+>
+  <img style="height: 100%;width: 100%;position: absolute;left: 0;top: 0;" [defaultImage]="''" [lazyLoad]="animeinfo?.image">
+
+
+<ion-button 
+
+style="
+border: solid 2px aliceblue;
+border-radius: 50px;
+position: absolute;
+left: 50%;
+    bottom: 0;
+    transform: translate(-50%);
+"  color='danger' fill="solid" shape="round">
+
+
+<strong
+[innerHTML]="item?.number"
+style="color: aliceblue;font-size: 20px;padding: 10px;">
+
+</strong>
+
+
+</ion-button>
+</ion-card>
+</div>
+
+
+
+
+<div
+style="width: 175px;text-align: center;
+
+
+"
+*ngFor="let item of movieorserieinfo?.episodes;let i = index;trackBy:trackloopangular"
+
+>
+
+
+
+<ion-card
+button
+style="
+margin: 0;
+min-height: 100%;
+height: 100%;
+background: black;
+border: solid 2px aliceblue;
+width: 175px;
+border-radius: 50px;
+"
+
+(click)="fetchmovieseriessrc(item?.id,movieorserieinfo?.id)"
+>
+  <img style="height: 100%;width: 100%;position: absolute;left: 0;top: 0;" [defaultImage]="''" [lazyLoad]="movieorserieinfo?.image">
+
+
+<ion-button 
+*ngIf="item?.episode"
+style="
+border: solid 2px aliceblue;
+border-radius: 50px;
+position: absolute;
+left: 50%;
+    bottom: 0;
+    transform: translate(-50%);
+"  color='danger' fill="solid" shape="round">
+
+
+<strong
+[innerHTML]="item?.episode"
+style="color: aliceblue;font-size: 20px;padding: 10px;">
+
+</strong>
+
+
+</ion-button>
+
+
+<ion-button 
+*ngIf="item?.duration"
+style="
+border: solid 2px aliceblue;
+border-radius: 50px;
+position: absolute;
+left: 50%;
+    bottom: 0;
+    transform: translate(-50%);
+
+"  color='danger' fill="solid" shape="round">
+
+
+<strong
+[innerHTML]="item?.duration"
+style="color: aliceblue;font-size: 20px;padding: 10px;">
+
+</strong>
+
+
+</ion-button>
+</ion-card>
+</div>
+
+<div
+style="width: 175px;text-align: center;
+border-radius: 50px;
+
+"
+*ngFor="let item of movieorserieinfo?.recommended;let i = index;trackBy:trackloopangular"
+
+>
+
+
+
+<ion-card
+button
+style="
+margin: 0;
+min-height: 100%;
+height: 100%;
+background: black;
+border: solid 2px aliceblue;
+width: 175px;
+border-radius: 50px;
+
+"
+
+(click)="fetchtvshowormovieinfo(item?.id)"
+>
+  <img style="height: 100%;width: 100%;position: absolute;left: 0;top: 0;" [defaultImage]="''" [lazyLoad]="item?.image">
+
+
+<ion-button 
+(click)="fetchtvshowormovieinfo(item?.id)"
+*ngIf="item?.type === 'movie'"
+style="
+border: solid 2px aliceblue;
+border-radius: 50px;
+position: absolute;
+left: 50%;
+    bottom: 0;
+    transform: translate(-50%);
+"  color='danger' fill="solid" shape="round">
+
+
+<strong
+[innerHTML]="item?.duration"
+style="color: aliceblue;font-size: 20px;padding: 10px;">
+
+</strong>
+
+
+</ion-button>
+
+
+<ion-button 
+*ngIf="item?.type !== 'movie'"
+style="
+border: solid 2px aliceblue;
+border-radius: 50px;
+position: absolute;
+left: 50%;
+    bottom: 0;
+    transform: translate(-50%);
+"  color='success' fill="solid" shape="round">
+
+
+<strong
+[innerHTML]="item?.lastEpisodes"
+style="color: aliceblue;font-size: 20px;padding: 10px;">
+
+</strong>
+
+
+</ion-button>
+</ion-card>
+</div>
+
+
+
+
+<div
+style="width: 200px;text-align: center;background:black"
+tappable
+*ngFor="let item of listoftracks;let i = index;trackBy:trackloopangular"
+[hidden]='!item?.preview_url'
+>
+
+
+<div>
+
+<ion-card
+*ngIf="item?.preview_url"
+(click)="listentotrack(item?.preview_url,item?.album?.images[0].url ? item?.album?.images[0].url  : globaltracksimage)"
+
+button
+style="
+border: #800 solid 2px;
+height: 100px;
+width: 100px;
+background: black;
+border-radius: 50px;
+" slot="start">
+  <img style="background: black;border: #800 solid 2px;" [defaultImage]="''" [lazyLoad]="item?.album?.images[0].url ? item?.album?.images[0].url  : globaltracksimage" />
+</ion-card>
+
+<strong style="color: aliceblue;"
+[innerHTML]="item?.name"
+>
+
+</strong>
+
+</div>
+
+<div style="display: flex;gap: 10px;">
+
+  <div>
+
+
+<ion-button shape="round" color="danger" style="border: solid 2px aliceblue;border-radius: 50px;
+width: 100%;
+"
+ (click)="searchlongmusic(item)"
+ >
+ 
+
+
+<i-bs name="search"
+width="35"
+  height="25">
+</i-bs>
+
+</ion-button>
+
+</div>
+
+
+
+<div>
+
+<ion-button
+
+(click)="getrelatedartist(item?.artists[0]?.id)"
+shape="round" color="success" style="border: solid 2px aliceblue;border-radius: 50px;
+width: 100%;
+"
+
+ >
+<i-bs 
+style="color: aliceblue;" slot="end" name="diagram-3"
+        width="35"
+          height="25">
+</i-bs>
+</ion-button>
+</div>
+
+
+</div>
+
+
+
+
+</div>
+
+
+<div
+style="width: 175px;text-align: center;"
+tappable
+button
+(click)="listentotrack(item?.youtubeId,item?.thumbnailUrl)"
+*ngFor="let item of listoflongsong;let i = index;trackBy:trackloopangular"
+>
+
+<ion-card style="
+border: #800 solid 2px;
+height: 150px;
+width: 150px;
+background: black;
+margin: 0;
+border-radius: 50px;
+" slot="start">
+  <img style="background: black;border: #800 solid 2px;" [defaultImage]="''" [lazyLoad]="item?.thumbnailUrl" />
+</ion-card>
+
+
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+<video hidden crossorigin="anonymous" autoplay loop  id="videotextureid"></video>
+
+
+
+
+
+  
+  </div>
+
+  
+<ion-toast
+style="
+text-align: center;
+font-size: 25px;
+color: #800;
+--background: aliceblue;
+"
+[isOpen]="isAlertcopiedtextOpen"
+message="Copied"
+position="middle"
+[duration]="2000"
+(didDismiss)="setOpenalertcopiedtext(false)"
+></ion-toast>
+
+
+
+<ion-toast
+style="
+text-align: center;
+font-size: 25px;
+color: #800;
+--background: aliceblue;
+"
+message="SAVED"
+[isOpen]="opentoastsaved"
+
+position="middle"
+[duration]="2000"
+(didDismiss)="setOpenalertcopiedtext(false)"
+></ion-toast>
+
+
+
+
+<ion-toast
+style="
+text-align: center;
+font-size: 25px;
+color: #800;
+--background: aliceblue;
+"
+message="SENT"
+[isOpen]="opentoastsent"
+
+position="middle"
+[duration]="2000"
+(didDismiss)="setOpenalertcopiedtext(false)"
+></ion-toast>
+
+
+<ion-toast
+style="
+text-align: center;
+font-size: 25px;
+color: #800;
+--background: aliceblue;
+"
+message="No Network Connection"
+[isOpen]="opentoastnointernet"
+icon="wifi-outline"
+position="middle"
+[duration]="2000"
+(didDismiss)="setOpenalertcopiedtext(false)"
+></ion-toast>
+
+
+
+
+
+
+
+
+<div style="
+position: fixed;
+top: 0;
+background: black;
+z-index: 999999999;
+width: 100%;
+height: 100%;
+"
+*ngIf="showimageviewerdiv"
+>
+
+<ion-button (click)="showimageviewerdiv = false"
+style="
+position: absolute;
+top: 10px;
+left: 10px;
+z-index: 9999999;
+border: solid 2px aliceblue;
+border-radius: 50px;
+"
+color="danger" fill="clear" shape="round">
+<i-bs name="x-circle"
+width="35" style="color: aliceblue;"
+  height="35">
+</i-bs>
+</ion-button>
+
+
+
+
+
+
+
+<img style="
+width: 100%;
+height: 100%;
+" 
+crossorigin="anonymous"
+
+
+
+[src]="imagetoviewfull" >
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+</ion-content>
+
+
+
+
+
+<ion-menu #menuel contentId="menuAssadiq" menuId="menuAssadiq" side="start" type="overlay">
+  <ion-header
+  style="
+  border-right: solid 2px aliceblue;
+  "
+  >
+    <ion-item 
+    (click)="showmodaluserprofile = true"
+    style="
+    --background: black;
+    border-bottom: solid 2px aliceblue;
+    text-align: center;
+    height: 150px;
+    "
+
+    button>
+      <ion-avatar style="
+        width: 125px;
+        height: 125px;
+        
+        " 
+        [style.border]="userprofileimage ?'solid 2px aliceblue' : 'unset' "
+        slot="start">
+        <img  [defaultImage]="''" [lazyLoad]="userprofileimage" 
+        *ngIf="userprofileimage"
+        />
+        <i-bs style="color: #800;"
+        *ngIf="!userprofileimage"
+        name="person-circle"
+              width="75"
+                height="75">
+  </i-bs>
+      </ion-avatar>
+      <ion-label>
+
+      <strong 
+      
+    [innerHTML]="username"
+      
+      style="color: aliceblue;white-space: nowrap;">
+       
+      </strong>
+    </ion-label>
+
+    </ion-item>
+  </ion-header>
+  <ion-content style="
+  --background: black;
+  border-right: solid 2px aliceblue;
+  ">
+ 
+
+ <ion-item
+ style="--background: black;border-bottom: solid 2px aliceblue;padding-top: 10px;padding-bottom: 10px;"
+ >
+  <ion-label style="text-align: center;color: aliceblue;">
+    <strong
+    style="font-size: 20px;"
+    [innerHTML]="socketstate ? 'ON LINE':'OFF LINE' "
+    [style.color]="socketstate ? 'greenyellow':'#800'"
+    >
+
+    </strong>
+  </ion-label>
+  <ion-toggle [checked]="socketstate" (ionChange)="togglesocketonoff($event,menuel)" slot="end"></ion-toggle>
+ </ion-item>
+
+
+ <ion-item
+ style="--background: black;border-bottom: solid 2px aliceblue;padding-top: 10px;padding-bottom: 10px;"
+ >
+  <ion-label style="text-align: center;color: aliceblue;">
+    <strong
+    style="font-size: 20px;"
+    [innerHTML]="'Vibration'"
+    
+    [style.color]="vibrationstate ? 'greenyellow':'#800'"
+    >
+
+    </strong>
+  </ion-label>
+  <ion-toggle  
+  [checked]="vibrationstate"
+  (ionChange)="togglevibrationchanged($event)" slot="end"></ion-toggle>
+ </ion-item>
+
+    <ion-segment style="width: 100%;
+    display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top:10px ;
+    " [value]="activeindexslidestring" (ionChange)="this.slidevertical = false;segmentChangedpage($event,menuel)">
+
+<ion-segment-button
+style="background: #800;color: aliceblue;text-align: center;border: solid aliceblue 2px;"
+ value="0">
+ <ion-label>Watch</ion-label>
+</ion-segment-button>
+
+<ion-segment-button style="background: #800;color: aliceblue;text-align: center;border: solid aliceblue 2px;" value="1">
+  <ion-label>Products</ion-label>
+</ion-segment-button>
+
+      <ion-segment-button style="background: #800;color: aliceblue;text-align: center;border: solid aliceblue 2px;" value="2">
+        <ion-label>Chat AI</ion-label>
+      </ion-segment-button>
+
+    
+   
+
+
+
+    <ion-segment-button style="background: #800;color: aliceblue;text-align: center;border: solid aliceblue 2px;" value="3">
+      <ion-label>Recent Animes</ion-label>
+    </ion-segment-button>
+
+
+  <ion-segment-button style="background: #800;color: aliceblue;text-align: center;border: solid aliceblue 2px;" value="4">
+    <ion-label>Trends Animes</ion-label>
+  </ion-segment-button>
+
+
+<ion-segment-button style="background: #800;color: aliceblue;text-align: center;border: solid aliceblue 2px;" value="5">
+  <ion-label>Populaire Animes</ion-label>
+</ion-segment-button>
+
+
+<ion-segment-button style="background: #800;color: aliceblue;text-align: center;border: solid aliceblue 2px;" value="6">
+  <ion-label>TV Shows</ion-label>
+</ion-segment-button>
+
+
+
+<ion-segment-button style="background: #800;color: aliceblue;text-align: center;border: solid aliceblue 2px;" value="7">
+  <ion-label>Movies</ion-label>
+</ion-segment-button>
+
+
+<ion-segment-button style="background: #800;color: aliceblue;text-align: center;border: solid aliceblue 2px;" value="8">
+  <ion-label>Trend Movies</ion-label>
+</ion-segment-button>
+
+
+<ion-segment-button style="background: #800;color: aliceblue;text-align: center;border: solid aliceblue 2px;" value="9">
+  <ion-label>Music</ion-label>
+</ion-segment-button>
+
+
+<ion-segment-button style="background: #800;color: aliceblue;text-align: center;border: solid aliceblue 2px;" value="10">
+  <ion-label>News</ion-label>
+</ion-segment-button>
+
+    </ion-segment>
+
+
+
+  </ion-content>
+
+</ion-menu>
+
+
+
+
+<ion-modal
+
+style="
+--max-height: 75%;
+--height: 75%;
+align-items: end
+"
+[isOpen]="showmodalcommentproduct" (willDismiss)="onWillDismissproductcomment($event)">
+  <ng-template>
+    <ion-header style="border: solid 2px aliceblue;">
+      <ion-toolbar>
+    
+ 
+        <ion-buttons slot="end">
+          <ion-button (click)="showmodalcommentproduct = false" [strong]="true">
+            <i-bs style="color: aliceblue;" name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="
+    --background: black;
+    " >
+
+
+<div style="
+text-align: center;
+color: aliceblue;
+margin-top: 50px;
+"
+*ngIf='listofcomments?.length === 0 '
+>
+<strong style="color: aliceblue;font-size: 20px;">
+  No Comment Yet
+</strong>
+</div>
+
+<div style="
+background: black;
+border-bottom: solid 2px aliceblue;
+"
+  *ngFor="let item of listofcomments;let i = index;trackBy:trackloopangular"
+
+>
+
+<ion-item style="
+--background: black;
+
+"
+[hidden]="!item?.comment"
+>
+
+
+
+
+
+    <strong style="color: aliceblue;"
+    [innerHTML]="item?.comment"
+    >
+
+    </strong>
+
+</ion-item>
+
+<div style="text-align: end;">
+
+<ion-badge color="danger" style="border: solid 2px aliceblue;border-radius: 50px;"
+*ngIf="item?.time"
+slot="end">
+  <strong  style="color: aliceblue;"  [innerHTML]="item?.time | timeago | uppercase">
+
+  </strong>
+</ion-badge>
+</div>
+
+</div>
+
+
+<div
+style="position: fixed;bottom: 0;width: 100%;display: flex;text-align: center;"
+>
+
+<div style="width: 100%;">
+
+<ion-input 
+#inputcommentproduct
+
+type="text" style="color: aliceblue;text-align: center;border: solid 2px aliceblue;
+background: black;
+border-radius: 50px;
+" placeholder="Enter Comment"></ion-input>
+</div>
+<div>
+
+<ion-button 
+style="border: solid 2px aliceblue;border-radius: 50px;"
+(click)="addcommentratingtoproduct(inputcommentproduct)" color="danger" fill="solid" shape="round">
+ SEND
+</ion-button>
+</div>
+
+</div>
+
+
+</ion-content>
+
+</ng-template>
+</ion-modal>
+
+
+
+
+
+
+
+
+<ion-modal
+
+style="
+--max-height: 75%;
+--height: 75%;
+align-items: end
+"
+[isOpen]="modalinfoanimeopen" (willDismiss)="onWillDismissanimeinfog($event)">
+  <ng-template>
+    <ion-header style="border: solid 2px aliceblue;">
+      <ion-toolbar>
+    
+        <ion-title style="color: aliceblue;"
+       
+        >
+<strong
+[innerHTML]="animeinfo?.title?.english ? animeinfo?.title?.english : animeinfo?.title "
+>
+
+</strong>
+        </ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="modalinfoanimeopen = false" [strong]="true">
+            <i-bs style="color: aliceblue;" name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="
+    --background: black;
+    " >
+
+    <div
+    style="height: 0;width: 0;"
+    id="modalinfofirstdivid"
+    >
+
+    </div>
+
+<div
+style="width: 100%;
+height: 50%;
+"
+*ngIf="animeinfo?.image "
+
+>
+<ion-card
+(click)="fetchepisodeanimesrc(animeinfo?.episodes[0]?.id)"
+button
+style="
+margin: 25px;
+min-height: 100%;
+height: 100%;
+background: black;
+border: solid 2px aliceblue;
+"
+>
+  <img style="height: 100%;width: 100%;position: absolute;" [defaultImage]="''" [lazyLoad]="animeinfo?.image">
+</ion-card>
+</div>
+
+<div style="
+padding: 10px;
+"
+*ngIf="animeinfo?.episodes?.length > 0 "
+>
+
+<strong style="color: #800;font-size: 20px;">
+  EPISODES  -- 
+  <span
+  style="color: yellowgreen;"
+  >
+
+  {{animeinfo?.episodes?.length}}
+
+</span>
+
+</strong>
+
+</div>
+
+<div
+style="width: 100%;
+height: 75px;
+display: flex;
+  flex-wrap: nowrap; 
+  overflow: auto;
+"
+>
+
+<div
+style="width: 150px;text-align: center;"
+*ngFor="let item of animeinfo?.episodes;let i = index;trackBy:trackloopangular"
+
+>
+<ion-button 
+(click)="fetchepisodeanimesrc(item?.id)"
+style="
+border: solid 2px aliceblue;
+border-radius: 50px;
+"  color='danger' fill="solid" shape="round">
+
+
+<strong
+*ngIf="item?.number"
+[innerHTML]="item?.number"
+style="color: aliceblue;font-size: 20px;padding: 10px;">
+
+</strong>
+<i-bs name="play-circle"
+            width="35"
+              height="35">
+</i-bs>
+
+</ion-button>
+
+</div>
+
+</div>
+
+
+<div style="
+padding: 10px;
+"
+*ngIf="animeinfo?.recommendations?.length > 0 "
+>
+
+<strong style="color: #800;font-size: 20px;">
+  Recommendations
+
+</strong>
+
+</div>
+
+
+<ion-grid fixed>
+  <ion-row>
+    <ion-col size="12" style="
+      height: 200px;
+      border-bottom: solid 2px aliceblue;
+      "
+      *ngFor="let item of animeinfo?.recommendations;let i = index;trackBy:trackloopangular"
+      >
+    <div style="width: 100%;display: flex;text-align: center;">
+
+
+      <div
+      style="width: 100%;"
+      >
+      <ion-card
+      (click)="fetchanimeinfometa(item?.id)"
+      button
+      style="
+      margin: 0;
+      min-height: 175px;
+      height: 175px;
+      background: black;
+      border: solid 2px aliceblue;
+      "
+      >
+        <img style="height: 175px;width: 100%;" [defaultImage]="''" [lazyLoad]="item?.image">
+      </ion-card>
+      </div>
+      <div
+      style="width: 100%;"
+      >
+
+      <div
+      style="
+      width: 100%;
+      height: calc(100% - 75px);
+      overflow: scroll;
+      text-align: center;
+      "
+      >
+      <strong
+      style="color: aliceblue;"
+      [innerHTML]="item?.title?.english"
+      >
+
+      </strong>
+      </div>
+
+      <div
+      style="
+      width: 100%;
+      height: calc(75px);
+      overflow: scroll;
+      text-align: center;
+      "
+      >
+      <ion-button shape="round" color="success" style="border: solid 2px aliceblue;border-radius: 50px;
+      width: 100%;
+      "
+      
+      (click)="fetchanimeinfometa(item?.id)"
+      
+      >
+       
+     
+      <strong
+      style="color: aliceblue;
+      font-size: 20px;
+      padding: 10px;
+      "
+      [innerHTML]="item?.episodes"
+      >
+
+      </strong>
+      <i-bs style="color: blue;" name="collection-play"
+      width="35"
+        height="35">
+</i-bs>
+
+    </ion-button>
+      </div>
+
+    </div>  
+
+
+    </div>  
+    </ion-col>
+    
+  </ion-row>
+</ion-grid>
+
+<div
+*ngIf="animeinfo?.description"
+id="descriptionanimeidele"
+(click)="copytexttoclipboard(animeinfo?.description,'descriptionanimeidele')"
+tappable
+style="text-align: center;padding: 15px;">
+
+<strong
+[innerHTML]="animeinfo?.description"
+style="color: aliceblue;font-size: 20px;padding: 10px;">
+
+</strong>
+</div>
+
+
+
+      <ion-spinner
+      *ngIf="showspinnerwaitinganimeinfo"
+      style="
+            position: fixed;
+    left: 50%;
+    top: 50%;
+    scale: 5;
+    z-index: 99999999;
+
+        " name="dots" color="danger"></ion-spinner>
+    
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+
+
+
+<ion-modal
+
+style="
+--max-height: 75%;
+--height: 75%;
+align-items: end
+"
+[isOpen]="modalinfoamovieopen" (willDismiss)="onWillDismissanimeinfog($event)">
+  <ng-template>
+    <ion-header style="border: solid 2px aliceblue;">
+      <ion-toolbar>
+    
+        <ion-title style="color: aliceblue;"
+       
+        >
+<strong
+[innerHTML]="movieorserieinfo?.title?.english ? movieorserieinfo?.title?.english : movieorserieinfo?.title "
+>
+
+</strong>
+        </ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="modalinfoamovieopen = false" [strong]="true">
+            <i-bs style="color: aliceblue;" name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="
+    --background: black;
+    ">
+
+    <div
+    style="height: 0;width: 0;"
+    id="modalinfomovieseriesfirstdivid"
+    >
+
+    </div>
+
+<div
+style="width: 100%;
+height: 50%;
+"
+*ngIf="movieorserieinfo?.image "
+
+>
+<ion-card
+
+
+(click)="fetchmovieseriessrc(movieorserieinfo?.episodes[0]?.id,movieorserieinfo?.id)"
+
+button
+style="
+margin: 25px;
+min-height: 100%;
+height: 100%;
+background: black;
+border: solid 2px aliceblue;
+"
+>
+  <img style="height: 100%;width: 100%;position: absolute;" [defaultImage]="''" [lazyLoad]="movieorserieinfo?.image">
+</ion-card>
+</div>
+
+<div style="
+padding: 10px;
+"
+*ngIf="movieorserieinfo?.episodes?.length > 0 "
+>
+
+<strong style="color: #800;font-size: 20px;">
+  EPISODES  -- 
+  <span
+  style="color: yellowgreen;"
+  >
+
+  {{movieorserieinfo?.episodes?.length}}
+
+</span>
+
+</strong>
+
+</div>
+
+<div
+style="width: 100%;
+height: 75px;
+display: flex;
+  flex-wrap: nowrap; 
+  overflow: auto;
+"
+>
+
+<div
+style="width: 150px;text-align: center;"
+*ngFor="let item of movieorserieinfo?.episodes;let i = index;trackBy:trackloopangular"
+
+>
+<ion-button 
+(click)="fetchmovieseriessrc(item?.id,movieorserieinfo?.id)"
+style="
+border: solid 2px aliceblue;
+border-radius: 50px;
+"  color='danger' fill="solid" shape="round">
+
+
+<strong
+[innerHTML]="item?.episode"
+*ngIf="item?.episode"
+
+style="color: aliceblue;font-size: 20px;padding: 10px;">
+
+</strong>
+<i-bs name="play-circle"
+            width="35"
+              height="35">
+</i-bs>
+
+</ion-button>
+
+</div>
+
+</div>
+
+
+<div style="
+padding: 10px;
+"
+*ngIf="movieorserieinfo?.recommended?.length > 0 "
+>
+
+<strong style="color: #800;font-size: 20px;">
+  Recommendations
+
+</strong>
+
+</div>
+
+
+<ion-grid fixed>
+  <ion-row>
+    <ion-col size="12" style="
+      height: 200px;
+      border-bottom: solid 2px aliceblue;
+      "
+      *ngFor="let item of movieorserieinfo?.recommended;let i = index;trackBy:trackloopangular"
+      >
+    <div style="width: 100%;display: flex;text-align: center;">
+
+
+      <div
+      style="width: 100%;"
+      >
+      <ion-card
+      (click)="fetchtvshowormovieinfo(item?.id)"
+      button
+      style="
+      margin: 0;
+      min-height: 175px;
+      height: 175px;
+      background: black;
+      border: solid 2px aliceblue;
+      "
+      >
+        <img style="height: 175px;width: 100%;" [defaultImage]="''" [lazyLoad]="item?.image">
+      </ion-card>
+      </div>
+      <div
+      style="width: 100%;"
+      >
+
+      <div
+      style="
+      width: 100%;
+      height: calc(100% - 75px);
+      overflow: scroll;
+      text-align: center;
+      "
+      >
+      <strong
+      style="color: aliceblue;"
+      [innerHTML]="item?.title"
+      >
+
+      </strong>
+      </div>
+
+      <div
+      style="
+      width: 100%;
+      height: calc(75px);
+      overflow: scroll;
+      text-align: center;
+      "
+      >
+      <ion-button
+      *ngIf="item?.type === 'movie'"
+      shape="round" color="danger" style="border: solid 2px aliceblue;border-radius: 50px;
+      width: 100%;
+      "
+      
+      (click)="fetchtvshowormovieinfo(item?.id)"
+      
+      >
+       
+     
+      <strong
+      style="color: aliceblue;
+     
+      padding: 5px;
+      "
+      [innerHTML]="item?.type"
+      >
+
+      </strong>
+      <i-bs name="play-circle"
+      width="35"
+        height="35">
+</i-bs>
+
+    </ion-button>
+
+    <ion-button
+    *ngIf="item?.type !== 'movie'"
+    shape="round" color="success" style="border: solid 2px aliceblue;border-radius: 50px;
+    width: 100%;
+    "
+    
+    (click)="fetchtvshowormovieinfo(item?.id)"
+    
+    >
+     
+   
+    <strong
+    style="color: aliceblue;
+    
+    padding: 5px;
+    "
+    [innerHTML]="item?.type"
+    >
+
+    </strong>
+    <i-bs name="collection-play"
+    width="35"
+      height="35">
+</i-bs>
+
+  </ion-button>
+      </div>
+
+    </div>  
+
+
+    </div>  
+    </ion-col>
+    
+  </ion-row>
+</ion-grid>
+
+<div
+*ngIf="animeinfo?.description"
+id="descriptionanimeidele"
+(click)="copytexttoclipboard(animeinfo?.description,'descriptionanimeidele')"
+tappable
+style="text-align: center;padding: 15px;">
+
+<strong
+[innerHTML]="animeinfo?.description"
+style="color: aliceblue;font-size: 20px;padding: 10px;">
+
+</strong>
+</div>
+
+
+
+      <ion-spinner
+      *ngIf="showspinnerwaitinganimeinfo"
+      style="
+            position: fixed;
+    left: 50%;
+    top: 50%;
+    scale: 5;
+    z-index: 99999999;
+
+        " name="dots" color="danger"></ion-spinner>
+    
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+
+<ion-modal
+
+style="
+--max-height: 75%;
+--height: 75%;
+align-items: end
+"
+[isOpen]="showmodaltrackmp3" (willDismiss)="onWillDismissanimeinfog($event)">
+  <ng-template>
+    <ion-header style="border: solid 2px aliceblue;">
+      <ion-toolbar>
+    
+        <ion-title style="color: aliceblue;"
+       
+        >
+
+        </ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="showmodaltrackmp3 = false" [strong]="true">
+            <i-bs style="color: aliceblue;" name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="
+    --background: black;
+    " >
+
+    <div
+    style="height: 0;width: 0;"
+    id="modalmp3trackfirstdivid"
+    >
+
+    </div>
+
+
+
+<div
+*ngFor="let item of listoftracks;let i = index;trackBy:trackloopangular"
+[hidden]='!item?.preview_url'
+>
+
+
+
+
+  <ion-item
+  style="
+--background: black;
+    color: aliceblue;
+    text-align: center;
+    --min-height: 100px;
+    border-bottom: solid 2px aliceblue;
+  "
+  button
+
+*ngIf="item?.preview_url"
+  >
+
+  <ion-card style="
+  border: #800 solid 2px;
+  height: 100px;
+  width: 100px;
+  background: black;
+  border-radius: 50px;
+  " slot="start"
+  (click)="listentotrack(item?.preview_url,item?.album?.images[0].url ? item?.album?.images[0].url  : globaltracksimage)"
+  
+  >
+    <img [defaultImage]="''" style="background: black;border: solid 2px #800;height: 100px;" [lazyLoad]="item?.album?.images[0].url ? item?.album?.images[0].url  : globaltracksimage" />
+  </ion-card>
+    <ion-label 
+  (click)="listentotrack(item?.preview_url,item?.album?.images[0].url ? item?.album?.images[0].url  : globaltracksimage)"
+    
+    style="
+    height: 100px;
+    overflow: hidden;
+    "
+    [innerHTML]="item?.name"
+    >
+
+    </ion-label>
+
+    <i-bs 
+    (click)="getrelatedartist(item?.artists[0].id)"
+    style="color: yellowgreen;" slot="end" name="diagram-3"
+            width="50"
+              height="50">
+</i-bs>
+
+  </ion-item>
+
+
+</div>
+ 
+
+
+
+
+
+
+
+      <ion-spinner
+      *ngIf="showspinnerwaitinganimeinfo"
+      style="
+            position: fixed;
+    left: 50%;
+    top: 50%;
+    scale: 5;
+    z-index: 999999999999;
+        " name="dots" color="danger"></ion-spinner>
+    
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+
+<ion-modal
+
+style="
+--max-height: 75%;
+--height: 75%;
+align-items: end
+"
+[isOpen]="showmodaltrackmp3relatedartist" (willDismiss)="onWillDismissrelatedartist($event)">
+  <ng-template>
+    <ion-header style="border: solid 2px aliceblue;">
+      <ion-toolbar>
+    
+        <ion-title style="color: aliceblue;"
+       
+        >
+
+        </ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="showmodaltrackmp3relatedartist = false" [strong]="true">
+            <i-bs style="color: aliceblue;" name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="
+    --background: black;
+    " >
+  
+  
+   
+
+
+
+
+ 
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12" style="
+        height: 275px;
+        border-bottom: solid 2px aliceblue;
+        "
+        *ngFor="let item of listofrelatedartist;let i = index;trackBy:trackloopangular"
+        >
+
+        <ion-title
+        style="margin: 20px;">
+          <strong
+          style="color: aliceblue;"
+          [innerHTML]="item?.name"
+          >
+
+          </strong>
+     
+        </ion-title>
+
+      <div style="width: 100%;display: flex;text-align: center;">
+
+
+        <div
+        style="width: 100%;"
+        >
+        <ion-card
+        (click)="searchartist(item?.id)"
+        button
+        style="
+        margin: 0;
+        min-height: 175px;
+        height: 175px;
+        background: black;
+        border: solid 2px aliceblue;
+        "
+        >
+          <img style="height: 175px;width: 100%;" [defaultImage]="''" [lazyLoad]="item?.images[0].url">
+        </ion-card>
+        </div>
+        <div
+        style="width: 100%;"
+        >
+
+        <div
+        style="
+        width: 100%;
+        height: 50%;
+        overflow: scroll;
+        text-align: center;
+        "
+        >
+        <ion-button shape="round" color="success" fill="clear" style="border: solid 2px aliceblue;border-radius: 50px;
+        width: 100%;
+        "
+    
+         >
+         <strong
+         style="color: aliceblue;font-size: 20px;padding: 10px;"
+         [innerHTML]="item?.followers?.total | miliffynumber:'number'"
+         >
+
+         </strong>
+
+    
+        <i-bs name="people"
+        width="35"
+          height="35">
+</i-bs>
+
+      </ion-button>
+        </div>
+
+        <div
+        style="
+        width: 100%;
+        height: 50%;
+        overflow: scroll;
+        text-align: center;
+        "
+        >
+        <ion-button shape="round" color="danger" 
+        style="border: solid 2px aliceblue;border-radius: 50px;
+        width: 100%;
+        "
+      (click)="searchartist(item?.id)"
+         >
+         
+      
+         <i-bs name="search"
+         width="35"
+           height="35">
+</i-bs>
+
+      </ion-button>
+        </div>
+
+      </div>  
+
+
+      </div>  
+      </ion-col>
+      
+    </ion-row>
+  </ion-grid>
+
+
+
+
+
+
+      <ion-spinner
+      *ngIf="showspinnerwaitinganimeinfo"
+      style="
+            position: fixed;
+    left: 50%;
+    top: 50%;
+    scale: 5;
+    z-index: 999999999999;
+        " name="dots" color="danger"></ion-spinner>
+    
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+
+<ion-modal
+
+style="
+--max-height: 75%;
+--height: 75%;
+align-items: end
+"
+[isOpen]="openmodallongmusic" (willDismiss)="onWillDismisslongmusic($event)">
+  <ng-template>
+    <ion-header style="border: solid 2px aliceblue;">
+      <ion-toolbar>
+    
+        <ion-title style="color: aliceblue;"
+       
+        >
+
+        </ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="openmodallongmusic = false" [strong]="true">
+            <i-bs style="color: aliceblue;" name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="
+    --background: black;
+    " >
+
+<div style="
+position: sticky;
+top: 0;
+z-index: 9999999;
+background: black;
+border: solid 2px aliceblue;
+border-radius: 50px;
+display: flex;
+">
+<div
+style="
+width: 100%;
+"
+>
+
+
+<ion-input
+#inputsearchlongmusic
+[value]="inputsearchlongmusicvalue"
+style="
+text-align: center;
+color: aliceblue;
+background: black;
+border-radius: 50px;
+" type="search" placeholder='SEARCH MUSIC...'></ion-input>
+</div>  
+
+<div>
+<ion-button color="danger" shape="round" style="
+border: solid 2px aliceblue;
+border-radius: 50px;
+" (click)="searchlongmusicinput(inputsearchlongmusic)">
+
+
+<i-bs name="search"
+    width="35"
+      height="35">
+</i-bs>
+
+</ion-button>
+</div>
+
+</div>
+
+
+
+  <ion-item
+  style="
+--background: black;
+    color: aliceblue;
+    text-align: center;
+    --min-height: 150px;
+    border-bottom: solid 2px aliceblue;
+  "
+  button
+  (click)="listentotrack(item?.youtubeId,item?.thumbnailUrl)"
+  *ngFor="let item of listoflongsong;let i = index;trackBy:trackloopangular"
+  >
+
+  <ion-card style="
+  border: #800 solid 5px;
+  height: 100px;
+  width: 100px;
+  background: black;
+  margin: 0;
+  " slot="start">
+    <img [defaultImage]="''" style="height: 100px;width: 100%;" [lazyLoad]="item?.thumbnailUrl" />
+  </ion-card>
+    <ion-label
+    [innerHTML]="item?.title"
+    >
+
+    </ion-label>
+
+    <i-bs style="color: yellowgreen;" slot="end" name="music-player-fill"
+            width="50"
+              height="50">
+</i-bs>
+
+  </ion-item>
+
+ 
+
+
+
+
+
+
+
+      <ion-spinner
+      *ngIf="showspinnerwaitinganimeinfo"
+      style="
+            position: fixed;
+    left: 50%;
+    top: 50%;
+    scale: 5;
+    z-index: 99999999;
+        " name="dots" color="danger"></ion-spinner>
+    
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+
+
+<ion-modal
+
+style="
+--max-height: 75%;
+--height: 75%;
+align-items: end
+"
+[isOpen]="openmodalsearchanime" (willDismiss)="onWillDismisslongmusic($event)">
+  <ng-template>
+    <ion-header style="border: solid 2px aliceblue;">
+      <ion-toolbar>
+    
+        <ion-title style="color: aliceblue;"
+       
+        >
+
+        </ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="openmodalsearchanime = false" [strong]="true">
+            <i-bs style="color: aliceblue;" name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="
+    --background: black;
+    " >
+
+
+
+
+
+
+ 
+<ion-grid fixed>
+  <ion-row>
+    <ion-col 
+    
+  *ngFor="let item of listofanimesearched;let i = index;trackBy:trackloopangular"
+    style="height: 200px;width: 100%;border-bottom: solid 2px aliceblue;"
+    size="12">
+
+
+    <div
+    style="height: 200px;display: flex;width: 100%;"
+    >
+<div style="
+width: 100%;
+">
+  <ion-card style="
+  border: #800 solid 5px;
+  height: 175px;
+  width: 100%;
+  background: black;
+  margin: 0;
+  " slot="start">
+    <img [defaultImage]="''" style="height: 175px;width: 100%;" [lazyLoad]="item?.image" />
+  </ion-card>
+
+
+  </div>
+
+
+  <div style="width: 100%;">
+    <div
+    style="
+    height: calc(100% - 75px);
+    overflow: hidden;
+    "
+    >
+
+   
+    <strong style="color: aliceblue;"
+    [innerHTML]="item?.title"
+    >
+
+    </strong>
+  </div>
+    <div
+    style="display: flex;width: 100%;"
+    >
+
+    <div style="width: 100%;">
+
+    <ion-button 
+    (click)="fetchanimeinfo(item?.id)"
+    shape="round" style="border: solid 2px aliceblue;border-radius: 50px;width: 100%;" color="success">
+    <i-bs style="color: aliceblue;" name="collection"
+    width="35"
+      height="35">
+</i-bs>
+    </ion-button>
+
+  </div>
+
+
+  <div
+  *ngIf="item?.episodeId"
+  style="width: 100%;"
+  >
+
+    <ion-button 
+    (click)="fetchepisodeanimesrc(item?.episodeId)"
+    shape="round" style="border: solid 2px aliceblue;border-radius: 50px;width: 100%;" color="danger">
+    <i-bs style="color: aliceblue;" name="play-circle"
+    width="35"
+      height="35">
+</i-bs>
+    </ion-button>
+
+  </div>
+
+
+  </div>
+
+
+  </div>
+
+    </div>
+
+
+    </ion-col>
+   
+  </ion-row>
+</ion-grid>
+
+
+
+
+
+
+      <ion-spinner
+      *ngIf="showspinnerwaitinganimeinfo"
+      style="
+            position: fixed;
+    left: 50%;
+    top: 50%;
+    scale: 5;
+    z-index: 99999999;
+        " name="dots" color="danger"></ion-spinner>
+    
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+
+<ion-modal
+
+style="
+--max-height: 75%;
+--height: 75%;
+align-items: end
+"
+[isOpen]="openodalsearchmoviesseries" (willDismiss)="onWillDismisslongmusic($event)">
+  <ng-template>
+    <ion-header style="border: solid 2px aliceblue;">
+      <ion-toolbar>
+    
+        <ion-title style="color: aliceblue;"
+       
+        >
+
+        </ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="openodalsearchmoviesseries = false" [strong]="true">
+            <i-bs style="color: aliceblue;" name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="
+    --background: black;
+    " >
+
+
+
+
+
+
+ 
+<ion-grid fixed>
+  <ion-row>
+    <ion-col 
+    
+  *ngFor="let item of listofmoviesseriessearched;let i = index;trackBy:trackloopangular"
+    style="height: 200px;width: 100%;border-bottom: solid 2px aliceblue;"
+    size="12">
+
+
+    <div
+    style="height: 200px;display: flex;width: 100%;"
+    >
+<div style="
+width: 100%;
+">
+  <ion-card 
+  button
+
+  (click)="fetchtvshowormovieinfo(item?.id)"
+
+  style="
+  border: #800 solid 5px;
+  height: 175px;
+  width: 100%;
+  background: black;
+  margin: 0;
+  " slot="start">
+    <img [defaultImage]="''" [lazyLoad]="item?.image" />
+  </ion-card>
+
+
+  </div>
+
+
+  <div style="width: 100%;">
+    <div
+    style="
+    height: calc(100% - 75px);
+    overflow: hidden;
+    "
+    >
+
+   
+    <strong style="color: aliceblue;"
+    [innerHTML]="item?.title"
+    >
+
+    </strong>
+  </div>
+    <div
+    style="display: flex;width: 100%;"
+    >
+
+    <div style="width: 100%;">
+
+    <ion-button 
+    (click)="fetchtvshowormovieinfo(item?.id)"
+    shape="round" style="border: solid 2px aliceblue;border-radius: 50px;width: 100%;" 
+    [color]="item?.type === 'movie' ? 'danger' : 'success'">
+    <i-bs style="color: aliceblue;" name="collection"
+    width="35"
+      height="35">
+</i-bs>
+    </ion-button>
+
+  </div>
+
+
+ 
+
+
+  </div>
+
+
+  </div>
+
+    </div>
+
+
+    </ion-col>
+   
+  </ion-row>
+</ion-grid>
+
+
+
+
+
+
+      <ion-spinner
+      *ngIf="showspinnerwaitinganimeinfo"
+      style="
+            position: fixed;
+    left: 50%;
+    top: 50%;
+    scale: 5;
+    z-index: 99999999;
+        " name="dots" color="danger"></ion-spinner>
+    
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+
+
+
+
+
+
+<ion-modal
+
+style="
+--max-height: 75%;
+--height: 75%;
+align-items: end
+"
+[isOpen]="openmodaltexttospeech"
+(willPresent)="onwillPresentmodaltexttranslate($event)"
+(willDismiss)="onWillDismisslongmusic($event)">
+  <ng-template>
+    <ion-header style="border: solid 2px aliceblue;">
+      <ion-toolbar>
+    
+        <div style="display: flex;width: 90%;">
+
+        <ion-item
+        style="
+        border: solid 2px aliceblue;
+        --background: rgb(0, 0, 0 , 0.5);
+        color: aliceblue;
+        border-radius: 50px;
+        width: 50%;
+        "
+        *ngIf="listofcodeslang?.length> 0 "
+        >
+         
+        <i-bs style="color: #800;" slot="start" name="translate"
+            width="35"
+              height="35">
+</i-bs>
+        
+               
+                <ion-select
+                (ionChange)="selectlangoftranslating($event)"
+                [value]="listofcodeslang[0]" multiple="false" [placeholder]="listofcodeslang[0] | miliffynumber:'language' ">
+                  <ion-select-option
+                  *ngFor="let item of listofcodeslang"
+                  [value]="item">
+                <strong style="color: aliceblue;">
+                  {{item | miliffynumber:'language'}}
+                </strong> 
+                </ion-select-option>
+                  
+                </ion-select>
+        
+              </ion-item>
+
+
+
+              <ion-item
+              style="
+              border: solid 2px aliceblue;
+              --background: rgb(0, 0, 0 , 0.5);
+              color: aliceblue;
+              border-radius: 50px;
+              width: 50%;
+              "
+              *ngIf="listoflangtospeak?.length> 0 "
+              >
+               
+              <i-bs style="color: #800;" slot="start" name="ear"
+                  width="35"
+                    height="35">
+      </i-bs>
+              
+                     
+                      <ion-select
+                      (ionChange)="selectlangofspeaking($event)"
+                      [value]="listoflangtospeak[0]" multiple="false" 
+                      [placeholder]="listoflangtospeak[0] | miliffynumber:'language' ">
+                        <ion-select-option
+                        *ngFor="let item of listoflangtospeak"
+                        [value]="item">
+                      <strong style="color: aliceblue;">
+                        {{item | miliffynumber:'language'}}
+                      </strong> 
+                      </ion-select-option>
+                        
+                      </ion-select>
+              
+                    </ion-item>
+
+                  </div>
+
+        <ion-buttons slot="end">
+          <ion-button (click)="openmodaltexttospeech = false" [strong]="true">
+            <i-bs style="color: aliceblue;" name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="
+    --background: black;
+    " >
+
+
+
+
+
+<div
+id="textgeneratedbyaiidmodal"
+style="padding: 10px;text-align: center;color: aliceblue;height: auto;width: 100%;margin-bottom: 100px;"
+>
+<strong style="white-space: pre-line;color: aliceblue;"
+[innerHTML]="texttranslated"
+>
+
+</strong>
+</div>
+
+
+
+
+<div
+style="
+position: fixed;
+bottom: 0;
+width: 100%;
+display: flex;
+text-align: center;
+background: black;
+"
+>
+
+<div style="
+width: 100%;
+">
+<i-bs
+tappable
+(click)="copytexttoclipboard(texttranslated,'textgeneratedbyaiidmodal')"
+style="color: #800;" name="back"
+width="35"
+  height="35">
+</i-bs>
+</div>
+
+
+<div style="
+width: 100%;
+">
+<i-bs 
+[style.color]="textspeaking ?'#800' : 'aliceblue'"
+tappable
+(click)="speaktext()"
+name="ear"
+width="35"
+  height="35">
+</i-bs>
+</div>
+
+</div>
+
+
+      <ion-spinner
+      *ngIf="showspinnerwaitinganimeinfo"
+      style="
+            position: fixed;
+    left: 50%;
+    top: 50%;
+    scale: 5;
+    z-index: 99999999;
+        " name="dots" color="danger"></ion-spinner>
+    
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+
+
+
+
+<ion-modal
+
+style="
+--max-height: 75%;
+--height: 75%;
+align-items: end
+"
+[isOpen]="openmodalimagetotextai"
+
+(willDismiss)="onWillDismisslongmusic($event)">
+  <ng-template>
+    <ion-header style="border: solid 2px aliceblue;">
+      <ion-toolbar>
+    
+  
+
+        <ion-buttons slot="end">
+          <ion-button (click)="openmodalimagetotextai = false" [strong]="true">
+            <i-bs style="color: aliceblue;" name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="
+    --background: black;
+    " >
+
+<ion-card
+
+button
+style="
+
+min-height: 175px;
+height: 175px;
+background: black;
+border: solid 2px aliceblue;
+"
+>
+  <img style="height: 100%;width: 100%;position: absolute;left: 0;top: 0;"
+   [defaultImage]="''" [lazyLoad]="imagetotextairesult[0]">
+</ion-card>
+
+
+
+<div
+id="imagetextgeneratedbyaiidmodal"
+style="padding: 10px;text-align: center;color: aliceblue;height: auto;width: 100%;margin-bottom: 100px;"
+>
+<strong style="white-space: pre-line;color: aliceblue;"
+[innerHTML]="imagetotextairesult[1]"
+>
+
+</strong>
+</div>
+
+
+
+
+<div
+style="
+position: fixed;
+bottom: 0;
+width: 100%;
+display: flex;
+text-align: center;
+background: black;
+"
+>
+<div style="
+width: 100%;
+"
+
+
+>
+<ion-button 
+(click)="copytexttoclipboard(imagetotextairesult[1],'imagetextgeneratedbyaiidmodal')"
+color="success"
+style="border: solid 2px aliceblue;border-radius: 50px;"
+fill="solid" shape="round">
+
+<i-bs
+tappable
+
+style="color: #800;" name="back"
+width="35"
+  height="35">
+</i-bs>
+</ion-button>
+</div>
+
+<div style="
+width: 100%;
+">
+<ion-button (click)="shareimage(imagetotextairesult[0])" color="success"
+style="border: solid 2px aliceblue;border-radius: 50px;"
+fill="solid" shape="round">
+
+<i-bs
+tappable
+
+style="color: #800;" name="share"
+width="35"
+  height="35">
+</i-bs>
+</ion-button>
+
+</div>
+
+<div style="
+width: 100%;
+">
+<ion-button (click)="speaktextwithtext(imagetotextairesult[1])" color="success"
+style="border: solid 2px aliceblue;border-radius: 50px;"
+fill="solid" shape="round">
+
+<i-bs
+tappable
+
+style="color: #800;" name="ear"
+width="35"
+  height="35">
+</i-bs>
+</ion-button>
+
+</div>
+
+
+</div>
+
+
+    
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+
+
+
+
+
+<ion-modal
+
+style="
+--max-height: 50%;
+--height: 50%;
+align-items: end
+"
+[isOpen]="openmodalmeshedit"
+
+(willDismiss)="onWillDismissmeshedit($event)">
+  <ng-template>
+    <ion-header style="border: solid 2px aliceblue;">
+      <ion-toolbar>
+    
+        <ion-buttons slot="start">
+          <ion-button (click)="removeobjectfromscene()" [strong]="true">
+            <i-bs style="color: yellowgreen;" name="trash"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+
+
+          <ion-button  [strong]="true">
+            <ngx-colors 
+  ngx-colors-trigger 
+  [(ngModel)]="colorpicker"
+  [format] = "'hex'"
+  (change)="colormaterialchanged($event)" 
+></ngx-colors>
+
+          </ion-button>
+
+
+        </ion-buttons>
+
+        <ion-buttons slot="end">
+          <ion-button (click)="openmodalmeshedit = false" [strong]="true">
+            <i-bs style="color: aliceblue;" name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="
+    --background: black;
+    " >
+
+<ion-item button 
+(click)="addtexturefromcamera()"
+>
+  <ion-label>Add Current Video</ion-label>
+
+
+<fa-icon style="color: #800;" class="fa-2x" [icon]="faImages"></fa-icon>
+
+
+</ion-item>
+
+<ion-item button 
+(click)="inputimagetexture?.click()"
+>
+  <ion-label>Add Image</ion-label>
+  <i-bs style="color: #800;" name="image"
+            width="35"
+              height="35">
+</i-bs>
+
+<input (change)="changeimagetexturemesh($event)" hidden #inputimagetexture accept="image/*" type='file' >
+
+</ion-item>
+
+<ion-item button 
+(click)="inputvideotexture?.click()"
+>
+  <ion-label>Add Video</ion-label>
+  <i-bs style="color: #800;" name="camera-video"
+            width="35"
+              height="35">
+</i-bs>
+
+<input (change)="changevideotexturemesh($event)" hidden
+ #inputvideotexture accept="video/*" type='file' >
+</ion-item>
+
+
+
+
+  <div style="height: 200px;padding: 25px;">
+
+    <div style="padding-left: 50px;padding-right: 50px;">
+
+<ngx-slider
+(userChangeEnd)="changerangescalex($event)"
+[(value)]="valuesliderscalex" [options]="optionssliderhorisontal"></ngx-slider>
+</div>
+
+<div style="height: 200px;">
+
+<ngx-slider
+(userChangeEnd)="changerangescaley($event)"
+[(value)]="valuesliderscaley" [options]="optionssliderverical"></ngx-slider>
+</div>
+
+</div>
+
+    
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+
+
+
+
+
+<ion-modal
+
+style="
+--max-height: 75%;
+--height: 75%;
+align-items: end;
+
+"
+[isOpen]="showmodalaudioaddtovideo"
+
+(willDismiss)="onWillDismissmeshedit($event)">
+  <ng-template>
+    <ion-header style="border: solid 2px aliceblue;">
+    
+      <ion-toolbar>
+        <div
+        style="
+         position: absolute;
+         width: 50% ;   
+         top: 0;
+         z-index: 999999;
+         
+        "
+        >
+        
+            <ion-range
+         style="padding: 0;"
+              min="0" max="1"
+              dualKnobs="false" pin="true"
+              snaps="true" step="0.1"
+              ticks="true" [value]="lastvolumeaudiorecording"
+              color="danger"
+              (ionChange)="rangeChangevolumeaudiorecording($event)">
+                
+                <i-bs slot="start" style="color: aliceblue;" name="volume-up"
+                width="35"
+                  height="35">
+        </i-bs>
+            </ion-range>
+          </div>
+
+        <ion-buttons slot="end">
+          <ion-button (click)="showmodalaudioaddtovideo = false" [strong]="true">
+            <i-bs style="color: aliceblue;" name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="
+    --background: black;
+    " >
+
+
+
+
+
+  <div style="
+    position: sticky;
+    top: 0;
+    z-index: 9999999;
+    background: black;
+    border: solid 2px aliceblue;
+    border-radius: 50px;
+    display: flex;
+    ">
+<div
+style="
+width: 100%;
+"
+>
+
+
+  <ion-input
+  #inputsearchmusicelmodal
+  style="
+  text-align: center;
+  color: aliceblue;
+  background: black;
+  border-radius: 50px;
+  " type="search" placeholder='SEARCH MUSIC...'></ion-input>
+</div>  
+
+<div>
+<ion-button color="danger" shape="round" style="
+border: solid 2px aliceblue;
+border-radius: 50px;
+" (click)="searchmusic(inputsearchmusicelmodal)">
+
+
+<i-bs name="search"
+        width="35"
+          height="35">
+</i-bs>
+
+</ion-button>
+</div>
+
+</div>
+
+  <ion-title style="
+  color: aliceblue;
+  padding: 15px;
+  border-bottom: solid 2px aliceblue;
+  ">
+     <ion-icon size="large" color="danger" name="flame-outline"></ion-icon>
+
+Add Music
+</ion-title>
+
+
+  <ion-grid 
+ 
+  fixed>
+    <ion-row>
+      <ion-col size="12" style="
+        height: 250px;
+        border-bottom: solid 2px aliceblue;
+        "
+        *ngFor="let item of listofnewspotifyreleasealbum;let i = index;trackBy:trackloopangular"
+        >
+
+        <ion-title
+        style="margin: 20px;">
+          <strong
+          style="color: aliceblue;"
+          [innerHTML]="item?.name"
+          >
+
+          </strong>
+     
+        </ion-title>
+
+      <div style="width: 100%;display: flex;text-align: center;">
+
+
+        <div
+        style="width: 100%;"
+        >
+        <ion-card
+        (click)="getnewreleasespotifytracks(item?.id,item?.images[0]?.url)"
+        button
+        style="
+        margin: 0;
+        min-height: 175px;
+        height: 175px;
+        background: black;
+        border: solid 2px aliceblue;
+        "
+        >
+          <img style="height: 100%;width: 100%;" [defaultImage]="''" [lazyLoad]="item?.images[0]?.url">
+        </ion-card>
+        </div>
+        <div
+        style="width: 100%;"
+        >
+
+        <div
+        style="
+        width: 100%;
+        height: 50%;
+        overflow: scroll;
+        text-align: center;
+        "
+        >
+        <ion-button shape="round" color="danger" style="border: solid 2px aliceblue;border-radius: 50px;
+        width: 100%;
+        "
+         (click)="searchlongmusic(item)"
+         >
+         
+
+    
+        <i-bs name="search"
+        width="35"
+          height="35">
+</i-bs>
+
+      </ion-button>
+        </div>
+
+        <div
+        style="
+        width: 100%;
+        height: 50%;
+        overflow: scroll;
+        text-align: center;
+      
+        "
+        >
+        <ion-button shape="round" color="success" style="border: solid 2px aliceblue;border-radius: 50px;
+        width: 100%;
+        "
+         (click)="getnewreleasespotifytracks(item?.id,item?.images[0]?.url)"
+         >
+         
+         <strong
+         style="color: aliceblue;font-size: 20px;padding: 10px;"
+         [innerHTML]="item?.total_tracks"
+         >
+
+         </strong>
+    
+        <i-bs name="collection"
+        width="35"
+          height="35">
+</i-bs>
+
+      </ion-button>
+        </div>
+
+      </div>  
+
+
+      </div>  
+      </ion-col>
+      
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-spinner
+      *ngIf="showspinnerwaitinganimeinfo"
+      style="
+            position: fixed;
+    left: 50%;
+    top: 50%;
+    scale: 5;
+    z-index: 99999999;
+        " name="dots" color="danger"></ion-spinner>
+
+
+
+</ion-content>
+
+</ng-template>
+</ion-modal>
+
+
+
+
+<ion-modal
+
+style="
+--max-height: 75%;
+--height: 75%;
+align-items: end
+"
+[isOpen]="showmodalmap"
+
+(willDismiss)="onWillDismissmap($event)"> 
+  <ng-template>
+    <ion-header style="border: solid 2px aliceblue;">
+      <ion-toolbar>
+    
+ 
+  
+
+        <ion-buttons slot="end">
+          <ion-button (click)="showmodalmap = false" [strong]="true">
+            <i-bs style="color: aliceblue;" name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="
+    --background: black;
+    " >
+
+
+<div style="
+position: fixed;
+  z-index: 9999999;
+  right: 0;
+  background: rgb(0, 0, 0 , 0.5);
+  text-align: center;
+">
+
+    
+    <strong
+    style="color: aliceblue;"
+    [innerHTML]="addressonmap"
+    >
+
+    </strong>
+
+</div>
+
+<div
+#mapel
+(leafletMapReady)="leafleatmapready($event)"
+style="height: 100%;"
+     leaflet 
+    
+     [leafletOptions]="optionsmap">
+</div>
+
+
+<div
+
+style="position: fixed;
+bottom: 10px;
+text-align: center;
+z-index: 999999;
+left: 10px;
+border: solid 5px aliceblue;
+  border-radius: 50px;
+"
+tappable
+*ngIf="userADDRESS"
+>
+
+<ion-button (click)="saveaddressuser()" 
+style="
+border: solid 2px aliceblue;
+border-radius: 50px;
+"
+color="danger" fill="solid" shape="round">
+SAVE
+</ion-button>
+
+
+</div>
+
+
+<div
+
+style="position: fixed;
+bottom: 10px;
+text-align: center;
+z-index: 999999;
+right: 10px;
+border: solid 5px aliceblue;
+  border-radius: 50px;
+  width: 75px;
+"
+tappable
+(click)="leafleatmapreadyclicked()"
+>
+
+<fa-icon style="color: #800;" class="fa-3x" [icon]="faMapPin"></fa-icon>
+
+
+</div>
+
+
+
+<div
+*ngIf="showspinnerwaitingmap"
+style="position: fixed;
+top: 50%;
+width: 100%;
+text-align: center;
+z-index: 999999;
+"
+>
+<ion-spinner name="crescent" style="scale: 5;" color="success" ></ion-spinner>
+</div>
+
+</ion-content>
+
+</ng-template>
+</ion-modal>
+
+
+
+
+
+
+
+<ion-modal
+
+style="
+--max-height: 100%;
+--height: 100%;
+align-items: end;
+
+"
+[isOpen]="showmodaluserprofile"
+
+(willDismiss)="onWillDismissprofile($event)"
+(didPresent)="ondidPresentprofile($event)"
+
+>
+  <ng-template>
+    <ion-header >
+      <ion-toolbar
+      style="
+        --background: black !important;
+        "
+      >
+    
+      <ion-title
+      (click)="showmodaleditnameuser = true"
+      >
+  
+      <strong 
+      [innerHTML]="username"
+      style="color: aliceblue;white-space: nowrap;">
+       
+      </strong>
+      </ion-title>
+
+        <ion-buttons slot="end">
+          <ion-button (click)="showmodaluserprofile = false" [strong]="true">
+            <i-bs style="color: aliceblue;" name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="
+    --background: black;
+    " >
+
+
+<ion-fab-button
+style="
+width: 75px;
+    z-index: 999999;
+    position: fixed;
+    bottom: 25px;
+    right: 15px;
+    height: 75px;
+    border: solid 5px aliceblue;
+    border-radius: 50px;
+"
+(click)="showmodaluservideos = true"
+color="danger">
+  <i-bs style="
+    color: aliceblue;
+    " name="camera-video"
+            width="50"
+              height="50">
+</i-bs>
+</ion-fab-button>
+
+
+
+
+<div>
+  <ion-item 
+ 
+  style="
+  --background: black;
+  border-bottom: solid 2px aliceblue;
+  text-align: center;
+  height: 150px;
+  "
+
+  button>
+    <ion-avatar style="
+      width: 125px;
+      height: 125px;
+      
+      " 
+      (click)="inputimageuserprofile?.click()"
+      [style.border]="userprofileimage ?'solid 2px aliceblue' : 'unset' "
+      slot="start">
+      <img  [defaultImage]="''" [lazyLoad]="userprofileimage" 
+      *ngIf="userprofileimage"
+      />
+      <i-bs style="color: #800;"
+      *ngIf="!userprofileimage"
+      name="person-circle"
+            width="75"
+              height="75">
+</i-bs>
+<input (change)="changeuserprofileimage($event,inputimageuserprofile)" hidden
+#inputimageuserprofile accept="image/*" type='file' >
+
+    </ion-avatar>
+    <ion-label
+    (click)="showmodaleditnameuser = true"
+    >
+
+    <strong 
+    [innerHTML]="username"
+    style="color: aliceblue;white-space: nowrap;">
+     
+    </strong>
+  </ion-label>
+
+  <i-bs
+  tappable
+  (click)="showmodaleditnameuser = true"
+
+  name="pen-fill" style="color: #800;"
+            width="35"
+              height="35">
+</i-bs>
+  </ion-item>
+</div>
+
+
+
+<div>
+
+
+
+  <div style="padding: 15px;">
+
+  <strong style="color: aliceblue;">
+    Describe Your Business
+  </strong>
+</div>
+
+
+  <ion-textarea 
+  style="color: aliceblue;"
+  label="Description" 
+  #inputuserdescriptionprofile
+  [value]="userdescription"
+  arrows="3"
+  labelPlacement="floating" fill="outline" placeholder="">
+
+  <ion-button (click)="saveuserdescription(inputuserdescriptionprofile)"  color="danger" fill="solid" style="
+  border: solid 2px aliceblue;
+  border-radius: 50px;
+  position: absolute;
+  right: 0;
+  " shape="round">
+  SAVE
+</ion-button>
+</ion-textarea>
+<div style="margin-top: 10px;text-align: center;">
+
+  <strong style="color: aliceblue;">
+    Phone Number
+  </strong>
+
+  <ion-item style="
+  --background: black;
+  border-bottom: solid 2px aliceblue;
+  "
+  button
+  (click)="openphoneditmodal = true;"
+  >
+
+    <ion-label style="color: aliceblue;text-align: center;">
+      <strong style="color: #800; font-size: 25px;" [innerHTML]="userPhoneNumber">
+
+      </strong>
+   
+    </ion-label>
+
+    <i-bs
+    tappable
+    (click)="openphoneditmodal = true"
+  
+    name="pen-fill" style="color: #800;"
+              width="35"
+                height="35">
+  </i-bs>
+
+  </ion-item>
+</div>
+
+
+
+
+<div style="margin-top: 10px;">
+
+  <strong style="color: aliceblue;">
+    AGE
+  </strong>
+
+  <ion-item style="
+  --background: black;
+  border-bottom: solid 2px aliceblue;
+  ">
+
+    <ion-label style="color: aliceblue">
+      <strong style="color: #800; font-size: 25px;" [innerHTML]="userage">
+
+      </strong>
+     
+      <span style="color: aliceblue;font-size: 20px;">
+        Years
+      </span>
+    </ion-label>
+
+    <ion-datetime-button color="danger" datetime="datetimeid"></ion-datetime-button>
+
+  </ion-item>
+</div>
+
+
+<div style="margin-top: 10px;">
+
+  <strong style="color: aliceblue;">
+    GENDER
+  </strong>
+
+  <ion-item style="
+  --background: black;
+  border-bottom: solid 2px aliceblue;
+  ">
+
+    <ion-label style="color: aliceblue">
+      <strong style="color: #800; font-size: 25px;" [innerHTML]="usergender">
+
+      </strong>
+     
+     
+    </ion-label>
+
+  <ion-select
+  [value]='usergender'
+
+    (ionChange)="selectusergender($event)"
+     multiple="false" [placeholder]="'Select Gender'">
+      <ion-select-option
+      *ngFor="let gen of listofgender"
+      [value]='gen?.label'
+      >
+      <strong style="color: aliceblue;">
+        {{gen?.label}}
+      </strong> 
+    </ion-select-option>
+       
+      </ion-select>
+ 
+
+  </ion-item>
+</div>
+
+
+<ion-item
+button
+style="color: aliceblue;border-bottom: solid 2px aliceblue ;
+--background: black;
+"
+(click)='showmodalmap = true; userADDRESS = true' 
+>
+<i-bs style="color: #800;" name="pin-map"
+width="35"
+  height="35">
+</i-bs>
+  <ion-label style="
+    color: aliceblue;
+    text-align: center;
+    ">
+  <strong [innerHTML]="useraddress ? useraddress : 'Address'">
+
+  </strong>  
+  </ion-label>
+
+
+</ion-item>
+
+</div>
+
+
+
+
+
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+
+
+
+    <ion-datetime
+    style="
+    border: solid 2px aliceblue;
+    
+    "
+    [value]="userbirthday"
+(ionChange)="changedateofbirth($event)"
+      id="datetimeid"
+      presentation="date"
+      class="dateage"
+  
+    ></ion-datetime>
+  </ng-template>
+</ion-modal>
+
+
+
+
+
+</ion-content>
+
+</ng-template>
+
+
+</ion-modal>
+
+<ion-modal [isOpen]="openphoneditmodal"
+
+(willDismiss)="onWillDismissuseredit($event)" 
+[initialBreakpoint]="0.3" [breakpoints]="[0.3]">
+  <ng-template>
+    <ion-content style="
+      --background: black;
+      border: solid 2px aliceblue;
+      ">
+
+    <div style='
+    padding: 15px;
+    '>
+      <strong style="color: aliceblue;">
+        Phone Number
+      </strong>
+    </div>
+
+
+    <ion-input style="
+    color: aliceblue;
+    text-align: center;
+    border: solid 2px #800;
+    
+    " label="Edit Number" 
+    #inputuserphonenumberprofile
+    [value]="userPhoneNumber"
+    type="tel"
+    label-placement="floating" fill="outline" placeholder="Enter Number"></ion-input>
+
+
+
+
+<div style="width: 100% ;text-align: center;padding: 20px;">
+<ion-button (click)="saveuserphonenumber(inputuserphonenumberprofile)"  color="danger" fill="solid" style="
+  border: solid 2px aliceblue;
+  border-radius: 50px;
+  " shape="round">
+  SAVE
+</ion-button>
+</div>
+
+
+</ion-content>
+
+  </ng-template>
+</ion-modal>
+
+
+<ion-modal [isOpen]="showmodaleditnameuser"
+
+(willDismiss)="onWillDismissuseredit($event)" 
+[initialBreakpoint]="0.3" [breakpoints]="[0.3]">
+  <ng-template>
+    <ion-content style="
+      --background: black;
+      border: solid 2px aliceblue;
+      ">
+
+    <div style='
+    padding: 15px;
+    '>
+      <strong style="color: aliceblue;">
+        Name 
+      </strong>
+    </div>
+
+
+    <ion-input style="
+    color: aliceblue;
+    text-align: center;
+    border: solid 2px #800;
+    
+    " label="Edit Name" 
+    #inputusernameprofile
+    [value]="username"
+    label-placement="floating" fill="outline" placeholder="Enter Name"></ion-input>
+
+
+
+
+<div style="width: 100% ;text-align: center;padding: 20px;">
+<ion-button (click)="saveusername(inputusernameprofile)"  color="danger" fill="solid" style="
+  border: solid 2px aliceblue;
+  border-radius: 50px;
+  " shape="round">
+  SAVE
+</ion-button>
+</div>
+
+
+</ion-content>
+
+  </ng-template>
+</ion-modal>
+
+
+<ion-modal [isOpen]="showmodaluserconnected"
+style="
+--max-height: 100px;
+--height: 100px;
+align-items: end;
+--width: 95%;
+"
+(willDismiss)="onWillDismissuseredit($event)" 
+>
+  <ng-template>
+    <ion-content style="
+      --background: black;
+      border: solid 2px aliceblue;
+      ">
+
+
+
+<div
+style="width: 100%;
+height: 100%;
+display: flex;
+  flex-wrap: nowrap;
+  overflow: auto;
+  gap: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+"
+
+
+
+>
+
+
+<div style="
+width: 100%;
+height: 100%;
+text-align: center;
+"
+*ngIf="userconnectedlist?.length === 0"
+>
+
+<div>
+  <strong style="color: aliceblue;">
+    No One connect with You
+  </strong>
+</div>
+<br>
+<div *ngIf="false">
+  <ion-button (click)="sharetext('Let\'s Chat and Have fun on Assadiq')"
+   color="danger" fill="solid" style="border: solid 2px aliceblue;
+   border-radius: 50px;
+   " shape="round">
+    Try it with Friends
+  </ion-button>
+</div>
+
+</div>
+
+
+
+<ion-avatar
+button
+style="
+margin: 0;
+min-height: 85px;
+height: 90px;
+background: black;
+border: solid 2px #800;
+width: 90px;
+border-radius: 50px;
+
+"
+tappable
+*ngFor="let item of userconnectedlist; let i = index;trackBy:trackloopangular"
+
+(click)="userconnectedclicked(item)"
+>
+  <img 
+  *ngIf="item?.userimage"
+  style="height: 100%;width: 100%;left: 0;top: 0;" 
+  [defaultImage]="''" [lazyLoad]="item?.userimage | miliffynumber:'buffer'">
+
+  <i-bs style="color: #800;" 
+  *ngIf="!item?.userimage"
+  name="person"
+  width="85"
+    height="85">
+</i-bs>
+
+</ion-avatar>
+
+
+</div>
+</ion-content>
+
+
+</ng-template>
+
+
+</ion-modal>
+
+
+
+
+
+
+
+
+
+
+<ion-modal
+
+style="
+--max-height: 90%;
+--height: 90%;
+align-items: end;
+
+"
+[isOpen]="showmodaluserclicked"
+
+(willDismiss)="onWillDismissprofile($event)"
+
+
+>
+  <ng-template>
+    <ion-header style="border: solid 2px aliceblue;">
+      <ion-toolbar>
+    
+  
+
+        <ion-buttons slot="end">
+          <ion-button (click)="showmodaluserclicked = false" [strong]="true">
+            <i-bs style="color: aliceblue;" name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="
+    --background: black;
+    " >
+
+<div>
+  <ion-item 
+ 
+  style="
+  --background: black;
+  border-bottom: solid 2px aliceblue;
+  text-align: center;
+  "
+
+  button>
+    <ion-avatar style="
+      width: 75px;
+      height: 75px;
+      
+      " 
+      
+      [style.border]="userclickeddata?.userimage ?'solid 2px aliceblue' : 'unset' "
+      slot="start">
+      <img  
+      
+      [defaultImage]="''" [lazyLoad]="userclickeddata?.userimage" 
+      *ngIf="userclickeddata?.userimage"
+      />
+      <i-bs style="color: #800;"
+      *ngIf="!userclickeddata?.userimage"
+      name="person-circle"
+            width="75"
+              height="75">
+</i-bs>
+
+
+    </ion-avatar>
+    <ion-label
+   
+    >
+
+    <strong 
+    [innerHTML]="userclickeddata?.username"
+    style="color: aliceblue;white-space: nowrap;">
+     
+    </strong>
+  </ion-label>
+
+
+  </ion-item>
+</div>
+
+
+
+
+<div>
+
+
+
+  <div style='
+  padding: 15px;
+  '>
+    <strong style="color: aliceblue;">
+      Name 
+    </strong>
+  </div>
+
+<div style="padding: 10px;text-align: center;">
+
+
+  <strong style="color: aliceblue;" [innerHTML]="userclickeddata?.userdescription">
+
+  </strong>
+</div>
+
+<div style="margin-top: 10px;text-align: center;">
+
+  <strong style="color: aliceblue;">
+    Phone Number
+  </strong>
+
+  <ion-item style="
+  --background: black;
+  border-bottom: solid 2px aliceblue;
+  "
+  button
+ 
+  >
+
+    <ion-label style="color: aliceblue;text-align: center;">
+      <strong style="color: #800; font-size: 25px;" [innerHTML]="userclickeddata?.userPhoneNumber">
+
+      </strong>
+   
+    </ion-label>
+
+ <ion-button 
+ style="border: solid 2px aliceblue;border-radius: 50px;width: 75px;"
+ color="success" fill="solid" shape="round">
+ <a [href]="'tel:'+userclickeddata?.userPhoneNumber">
+  <i-bs style="color: aliceblue;" name="telephone-outbound"
+  width="35"
+    height="35">
+</i-bs>
+  </a>
+ </ion-button>
+
+  </ion-item>
+</div>
+
+
+
+
+<div style="margin-top: 10px;">
+
+  <strong style="color: aliceblue;">
+    AGE
+  </strong>
+
+  <ion-item style="
+  --background: black;
+  border-bottom: solid 2px aliceblue;
+  ">
+
+    <ion-label style="color: aliceblue">
+      <strong style="color: #800; font-size: 25px;" [innerHTML]="userclickeddata?.userage">
+
+      </strong>
+     
+      <span style="color: aliceblue;font-size: 20px;">
+        Years
+      </span>
+    </ion-label>
+
+ 
+
+  </ion-item>
+</div>
+
+
+<div style="margin-top: 10px;margin-bottom: 10px;">
+
+  <strong style="color: aliceblue;">
+    GENDER
+  </strong>
+
+</div>
+
+<div style="text-align: center;">
+
+    <ion-label style="color: aliceblue">
+      <strong style="color: #800; font-size: 25px;" [innerHTML]="userclickeddata?.usergender">
+
+      </strong>
+     
+     
+    </ion-label>
+  </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</ion-content>
+
+</ng-template>
+
+
+</ion-modal>
+
+
+
+<ion-modal
+
+style="
+--max-height: 100%;
+--height: 100%;
+align-items: end;
+
+"
+[isOpen]="showmodaluservideos"
+
+(willDismiss)="onWillDismissuservideos($event)"
+
+
+>
+  <ng-template>
+    <ion-header >
+      <ion-toolbar style="
+        --background: black !important;
+        ">
+    
+    <ion-title>
+      
+    <strong
+    style="color: aliceblue;font-size: 20px;"
+
+    [innerHTML]="listofuservideos?.length"
+    >
+
+    </strong>
+    <span style="color: aliceblue;">
+      Videos
+    </span>
+  </ion-title>
+  
+
+        <ion-buttons slot="end">
+          <ion-button (click)="showmodaluservideos = false" [strong]="true">
+            <i-bs style="color: aliceblue;" name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="
+    --background: black;
+    " >
+
+
+<div
+style="width: 100%;
+text-align: center;
+position: fixed;
+    top: 50%;
+"
+    *ngIf='listofuservideos?.length === 0'
+
+>
+<strong style="
+color: aliceblue;
+font-size: 20px;
+">
+Your Videos appear here 
+</strong>
+
+<div>
+
+<ion-button (click)="opencameravideo(false)" 
+style="border: solid 2px aliceblue;border-radius: 50px;"
+color="danger" fill="solid" shape="round">
+  Start Recording
+</ion-button>
+</div>
+
+
+</div>
+
+    <ion-grid 
+    *ngIf='listofuservideos?.length > 0'
+    fixed>
+      <ion-row>
+
+        <ion-col size="6"
+        *ngIf="showprogressupladingfile"
+
+        >
+          <div 
+
+          style="z-index: 999999999;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50% , -50%);
+          ">
+         <ion-spinner name="crescent" style="color: aliceblue;
+         scale: 5;"></ion-spinner>
+          </div>
+        </ion-col>
+
+
+        <ion-col 
+        *ngFor="let item of listofuservideos; let i = index;trackBy:trackloopangular"
+        style="
+          height: 250px;
+          width: 100%;
+          min-height: 175px;
+          
+          "
+        size="6">
+         
+          <div
+          style="
+          height: 175px;
+          width: 100%;
+          "
+          >
+
+          <ion-card
+          button
+          style="
+          margin: 0;
+          min-height: 175px;
+          height: 175px;
+          background: black;
+          border: solid 2px aliceblue;
+          width: 100%;
+         
+          
+          "
+          button
+          (click)="openmyvideoitem(item,menuel)"
+          >
+            <img 
+            
+            poster="null"  style="height: 100%;width: 100%;
+            position:absolute;object-fit: cover;
+            "
+            *ngIf="item?.thumnail"
+             [defaultImage]="''" [lazyLoad]="item?.thumnail">
+          
+          
+          
+          </ion-card>
+        </div>
+          
+     <div style="width: 100%;text-align: left;">
+
+  <ion-badge 
+  *ngIf="item?.time"
+  color="danger" mode="ios">
+    <strong  [innerHTML]="item?.time | timeago | uppercase">
+  
+    </strong>
+  </ion-badge>
+
+  <div
+  style="
+  display: flex;
+  width: 100%;
+  text-align: center;
+  "
+  >
+
+
+  <div style="width: 100%;">
+   
+    <i-bs
+    tappable
+    (click)="deletevideofromstorage(item,i)"
+    style="color: #800;" name="trash"
+          width="35"
+            height="35">
+</i-bs>
+ 
+</div>
+
+
+  <div 
+  *ngIf="item.video"
+  style="width: 100%;">
+    <fa-icon
+    tappable
+    style="color: greenyellow;" class="fa-2x" 
+    (click)="sendvideofromstorageinside(i)"
+    [icon]="faArrowLeft"></fa-icon>
+  </div>
+
+ 
+
+  <div style="width: 100%;">
+    <fa-icon
+    tappable
+    (click)="sharevideooutside(item)"
+    style="color: greenyellow;" class="fa-2x" 
+    
+    [icon]="faArrowRightToBracket"></fa-icon>
+
+  </div>
+
+  </div>
+
+
+</div> 
+
+        </ion-col>
+      
+      </ion-row>
+    </ion-grid>
+
+
+    <div style="
+position: fixed;
+top: 0;
+background: black;
+z-index: 999999999;
+width: 100%;
+height: 100%;
+"
+*ngIf="showvideolocaldiv"
+>
+
+<ion-button (click)="showvideolocaldiv = false"
+style="
+position: absolute;
+top: 75px;
+left: 10px;
+z-index: 9999999;
+border: solid 2px aliceblue;
+border-radius: 50px;
+"
+color="danger" fill="clear" shape="round">
+<i-bs name="x-circle"
+width="35" style="color: aliceblue;"
+  height="35">
+</i-bs>
+</ion-button>
+
+
+
+<vg-player
+   
+
+
+style="height: 100%;width: 100%;"
+(onPlayerReady)="playervideogularreadyvideolocal($event)"
+
+
+>
+
+<vg-controls
+
+
+        
+        vgFor="videoplayerelocalid" [vgAutohide]="true" [vgAutohideTime]="5">
+          <vg-time-display vgFor="videoplayerelocalid" [vgProperty]="'current'" [vgFormat]="'hh:mm:ss'"></vg-time-display>
+      
+          
+
+
+          <vg-scrub-bar  >
+          <vg-scrub-bar-current-time style="
+                background: #800;
+    z-index: 999999999999;
+
+            " vgFor="videoplayerelocalid" [vgSlider]="true"></vg-scrub-bar-current-time>
+
+
+ 
+            <vg-scrub-bar-buffering-time style="
+              background: #800;
+              border-radius: 50px;
+              " vgFor="videoplayerelocalid"></vg-scrub-bar-buffering-time>
+        </vg-scrub-bar>
+
+        <vg-time-display vgFor="videoplayerelocalid" [vgProperty]="'total'" [vgFormat]="'hh:mm:ss'"></vg-time-display>
+
+    </vg-controls>
+
+<video style="
+width: 100%;
+height: 100%;
+object-fit: fill;
+" 
+crossorigin="anonymous"
+loop
+#videoplayerelocal
+
+[vgMedia]="$any(videoplayerelocal)"
+
+id="videoplayerelocalid"
+autoplay
+(click)="playingpausevideolocal()"
+(playing)="playingvideolocal()"
+
+[src]="videolocalsrc"  poster="videolocalsrcposter"></video>
+
+
+
+</vg-player>
+<div
+style="width: 100%;
+height: 25%;
+display: flex;
+  flex-wrap: nowrap;
+  overflow: auto;
+  gap: 25px;
+  z-index: 999999999;
+  position: fixed;
+  bottom: 50px;
+"
+
+
+
+>
+
+
+<div
+style="width: 175px;text-align: center;"
+*ngFor="let item of listofuservideos;let i = index;trackBy:trackloopangular"
+
+>
+
+
+
+<ion-card
+button
+style="
+margin: 0;
+min-height: 100%;
+height: 100%;
+background: black;
+border: solid 2px aliceblue;
+width: 175px;
+border-radius: 50px;
+"
+(click)="openmyvideoitem(item)"
+>
+  <img style="height: 100%;width: 100%;position: absolute;left: 0;top: 0;"
+   [defaultImage]="''" [lazyLoad]="item?.thumnail">
+
+
+</ion-card>
+</div>
+</div>
+
+
+
+
+</div>
+
+
+
+</ion-content>
+
+</ng-template>
+
+</ion-modal>
+
+
+
+
+<ion-modal
+
+style="
+--max-height: 100%;
+--height: 100%;
+align-items: end;
+
+"
+[isOpen]="showmodalnotifications"
+
+(willDismiss)="onWillDismissuservideos($event)"
+
+
+>
+  <ng-template>
+    <ion-header >
+      <ion-toolbar style="
+        --background: black !important;
+        ">
+    
+
+  <ion-title style="color: aliceblue;">
+    Notification
+  </ion-title>
+
+        <ion-buttons slot="end">
+          <ion-button (click)="showmodalnotifications = false" [strong]="true">
+            <i-bs style="color: aliceblue;" name="x-circle"
+            width="35"
+              height="35">
+</i-bs>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="
+    --background: black;
+    " >
+
+<div
+*ngIf="sectionnotificationchoosed === 'prive'"
+>
+
+<div
+style="width: 100%;
+text-align: center;
+position: fixed;
+    top: 50%;
+"
+    *ngIf='listofmessagevideoprive?.length === 0'
+
+>
+<strong style="
+color: aliceblue;
+font-size: 20px;
+">
+Notifications Prive appear here 
+</strong>
+
+<div>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div
+*ngIf="sectionnotificationchoosed === 'public'"
+>
+
+<div
+style="width: 100%;
+text-align: center;
+position: fixed;
+    top: 50%;
+"
+    *ngIf='listofmessagevideopublic?.length === 0'
+
+>
+<strong style="
+color: aliceblue;
+font-size: 20px;
+">
+Notifications Public appear here 
+</strong>
+
+<div>
+
+
+</div>
+
+
+</div>
+
+
+
+<ion-item 
+*ngFor="let item of listofmessagevideopublic;let i = index;trackBy:trackloopangular"
+style="
+--background: black;
+border-bottom: solid 2px aliceblue;
+"
+>
+  <ion-label
+  style="text-align: center;color: aliceblue;"
+  >
+<strong [innerHTML]='item?.text'>
+
+</strong>
+  </ion-label>
+</ion-item>
+
+</div>
+
+
+<ion-segment
+style="
+width: 100%;
+position: fixed;
+bottom: 0;
+z-index: 9999999999;
+"
+value="prive" (ionChange)="segmentChangednotificationsection($event)">
+  <ion-segment-button value="prive">
+    <ion-label>PRIVE</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="public">
+    <ion-label>PUBLIC</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+</ion-content>
+
+</ng-template>
+
+</ion-modal>

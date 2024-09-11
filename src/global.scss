@@ -1,0 +1,514 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+@import "@videogular/ngx-videogular/fonts/videogular.css";
+
+
+@import "font-awesome/scss/font-awesome.scss";
+
+
+@import 'leaflet/dist/leaflet.css';
+
+
+@import '@ctrl/ngx-emoji-mart/picker';
+
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+
+
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
+.swiper-pagination{
+width: 100%;
+display: flex !important;
+
+}
+
+.swiper-pagination-bullet-active {
+    color:#f00 !important;
+  }
+
+  .swiper-pagination-bullet {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    color:#f00 !important;
+
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .swiper-pagination-bullet-active {
+    color: #fff;
+    background: #007aff;
+  }
+
+  ion-toolbar{
+   --background: #800;
+   
+  }
+
+  ion-segment-button::part(indicator-background) {
+    background: green;
+    height: 10px;
+    border-radius: 50px;
+  }
+
+  ion-segment-button.ios {
+    --color: #08a391;
+    --color-checked: #fff;
+    --border-radius: 20px;
+  }
+
+
+  ion-segment-button.md {
+    --color: #08a391;
+    --color-checked: #fff;
+    --border-radius: 20px;
+  }
+
+  .alert-wrapper {
+    --background: black;
+    border: solid 2px aliceblue;
+    border-radius: 50px;
+    
+   }
+
+
+
+   .alert-radio-label{
+  color: aliceblue !important;
+    
+   }
+
+   .alert-head{
+    display: none !important;
+      
+     }
+
+     .infinite-loading-spinner > ion-spinner{
+      color: #800 !important;
+        scale: 2;
+       }
+
+       ::cue { visibility:visible;}
+
+
+
+       [part="bullet"] {
+        background: #800 !important;
+          height: 100px;
+          width: 100px;
+         }
+
+
+
+         [part="bullet-active"] {
+      background: rgb(98, 236, 6) !important;
+        scale: 2;
+       }
+
+       .swiper-pagination-bullet-active {
+        background-color: #800 !important;
+   }
+
+
+   :root {
+ 
+    --swiper-pagination-color: #800 !important;
+    --swiper-pagination-bullet-size: 15px;
+    --swiper-pagination-bullet-width: 50px;
+    --swiper-pagination-bullet-height: 20px;
+    --swiper-pagination-bullet-inactive-color: rgb(88, 241, 16);
+    --swiper-pagination-bullet-inactive-opacity: 1;
+    --swiper-pagination-bullet-display: flex;
+
+  }
+
+
+  .swiper-pagination .swiper-pagination-bullet {
+    opacity: 1;
+    background-color: white;
+  
+    display: flex !important;
+    overflow-x: scroll !important;
+}
+
+
+  ion-radio {
+    --border-radius: 4px;
+    --inner-border-radius: 4px;
+  
+    --color: #ddd;
+    --color-checked: #6815ec;
+  }
+  
+  ion-radio.ios::part(container) {
+    width: 20px;
+    height: 20px;
+  
+    border: 2px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .radio-checked.ios::part(container) {
+    border-color: #6815ec;
+  }
+
+  .counter {
+  position: fixed;
+  right: 0;
+  font-size: 15px;
+  color: aliceblue !important;
+
+}
+
+
+.colorbiteclass {
+  -webkit-animation:name 2s infinite;
+  animation:colorbite 2s infinite;
+
+}
+
+@keyframes colorbite {
+  0% {color:magenta;
+  background: yellowgreen;
+  }
+  50% {color:blue;
+  background: aqua;
+  }
+  100%{color: #800;
+  background: #800;
+  }
+}
+
+
+.leaflet-control-attribution {
+  display: none;
+}
+
+
+@keyframes glitch1 {
+  0% {
+    transform: none;
+    opacity: 1;
+  }
+  7% {
+    transform: skew(-0.5deg, -0.9deg);
+    opacity: 0.75;
+  }
+  10% {
+    transform: none;
+    opacity: 1;
+  }
+  27% {
+    transform: none;
+    opacity: 1;
+  }
+  30% {
+    transform: skew(0.8deg, -0.1deg);
+    opacity: 0.75;
+  }
+  35% {
+    transform: none;
+    opacity: 1;
+  }
+  52% {
+    transform: none;
+    opacity: 1;
+  }
+  55% {
+    transform: skew(-1deg, 0.2deg);
+    opacity: 0.75;
+  }
+  50% {
+    transform: none;
+    opacity: 1;
+  }
+  72% {
+    transform: none;
+    opacity: 1;
+  }
+  75% {
+    transform: skew(0.4deg, 1deg);
+    opacity: 0.75;
+  }
+  80% {
+    transform: none;
+    opacity: 1;
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+
+
+ion-range {
+  --bar-background: #a2d2ff;
+  --bar-background-active: #bde0fe;
+  --bar-height: 8px;
+  --knob-background: #ffc8dd;
+  --knob-size: 40px;
+  --pin-background: #ffafcc;
+  --pin-color: #fff;
+  padding: 0;
+}
+
+
+
+ion-range::part(tick) {
+  background: #a2d2ff;
+}
+
+ion-range::part(tick-active) {
+  background: #bde0fe;
+}
+
+
+
+ion-range::part(pin)::before {
+  content: none;
+}
+
+ion-range::part(knob) {
+  background: greenyellow;
+  border-radius: 10px;
+  border: solid 2px aliceblue;
+}
+
+ion-range::part(bar) {
+  background: #a2d2ff;
+}
+
+ion-range::part(bar-active) {
+  background: #bde0fe;
+}
+
+
+
+ion-toggle {
+  padding: 12px;
+
+  --track-background: #ddd;
+  --track-background-checked: #ddd;
+
+  --handle-background: #eb7769;
+  --handle-background-checked: #95c34e;
+
+  --handle-width: 25px;
+  --handle-height: 27px;
+  --handle-max-height: auto;
+  --handle-spacing: 6px;
+
+  --handle-border-radius: 4px;
+  --handle-box-shadow: none;
+}
+
+ion-toggle::part(track) {
+  height: 10px;
+  width: 65px;
+
+  /* Required for iOS handle to overflow the height of the track */
+  overflow: visible;
+}
+
+
+#time-button{
+  display: none !important;
+
+}
+
+
+
+.dateage > #date-button{
+  border: solid 2px aliceblue !important;
+  background: #800 !important;
+  color: aliceblue !important;
+}
+
+
+
+ion-datetime {
+  --background: #800;
+  --background-rgb: 255, 241, 242;
+
+  border-radius: 16px;
+  box-shadow: rgba(var(--ion-color-rose-rgb), 0.3) 0px 10px 15px -3px;
+}
+
+
+
+ion-datetime-button::part(native) {
+background: #800;
+border-radius: 50px;
+border: solid 2px aliceblue;
+color: aliceblue;
+}
+
+
+ion-datetime::part(calendar-day) {
+
+  color: aliceblue;
+
+}
+
+ion-datetime::part(month-year-button) {
+
+  color: greenyellow;
+
+}
+
+
+.calendar-month-grid{
+  color: aliceblue  !important;
+
+
+}
+
+ion-datetime::part(wheel-item) {
+  color: aliceblue;
+  background: #800 !important;
+
+}
+
+ion-datetime::part(wheel-item active) {
+  color: greenyellow;
+  border-radius: 50px;
+  border: solid 2px aliceblue;
+
+}
+
+ion-picker{
+  background: aliceblue !important;
+}
+
+
+::cue {
+  color: aliceblue;
+z-index: 99999999999;
+  width: 100%;
+  text-align: center;
+  border: solid 2px aliceblue;
+}
+
+
+
+
+.leaflet-layer,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-control-attribution {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+  border: solid 2px aliceblue;
+  border-radius: 50px;
+}
+
+
+ion-select {
+  &::part(container) {
+      width: 100%;
+      text-align: center;
+  }
+}
+
+
+@keyframes handmove {
+  0%   {bottom: 0px;}
+
+  50%  { bottom: 50px;}
+  
+  100% {bottom: 100px;}
+}
+
+
+@keyframes handmovehorisontal {
+  0%   {left: 50%;}
+
+  50%  { left: 55%;}
+  
+  100% {left: 45%;}
+}
+
+
+@keyframes scrollingdivanimation {
+  0%   {left: 0%;}
+  100% {left: -100%;}
+}
+
+
+
+carousel  > div {
+  height: calc(100% - 225px) !important;
+}
+
+slide  > div {
+  height: calc(100% - 50px) !important;
+  min-height: calc(100% - 50px) !important;
+}
+
+.carousel-control-prev-icon{
+  border-radius: 50px;
+  scale: 1.5;
+  bottom: 50px !important;
+  z-index: 9999999;
+  opacity: 1;
+  border: solid 2px #800;
+ position: absolute;
+}
+
+
+.carousel-control-next-icon{
+  border-radius: 50px;
+  scale: 1.5;
+  bottom: 50px !important;
+  z-index: 9999999;
+  opacity: 1;
+  border: solid 2px #800;
+ position: absolute;
+}
