@@ -70,7 +70,6 @@ import { MiliffynumberModule } from '../pipes/miliffynumber.module';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 
 
-import { SwipeModule } from 'ng-swipe';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -118,7 +117,6 @@ import { NgxStarsModule } from 'ngx-stars';
    "titleColor": "#800000",
    
     }),
-    SwipeModule,
     FontAwesomeModule, 
     NgxSliderModule,
     LeafletModule,
