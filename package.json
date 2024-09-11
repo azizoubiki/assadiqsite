@@ -157,7 +157,7 @@
     "typescript": "~5.4.0"
   },
   "overrides": {
-    "@angular-slider/ngx-slider@": "14.0.0"
+    "@angular-slider/ngx-slider@": "~14.0.0"
 },
   "description": "An Ionic project"
 }
